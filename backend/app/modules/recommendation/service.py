@@ -7,6 +7,7 @@ from app.modules.compatibility import service as compatibility_service
 from app.modules.compatibility.enums import CompatibilityRelation, CompatibilityStatus
 from app.modules.compatibility.schemas import CompatibilityResult
 from app.modules.performance import service as performance_service
+from app.modules.performance.enums import BottleneckVerdict
 from app.modules.performance.schemas import BottleneckAnalysisRequest, BottleneckAnalysisResult
 from app.modules.recommendation.enums import ComponentSlot, RecommendationPriority, UpgradeProfile
 from app.modules.recommendation.schemas import (
@@ -19,6 +20,33 @@ from app.modules.recommendation.schemas import (
 # evita recomendar troca por ganho marginal que não justificaria o custo/trabalho.
 _MIN_TIER_GAIN = 8
 _MIN_RAM_CAPACITY_GB = 16
+
+# Texto do resumo (etapa 3) precisa ser lido por alguém sem vocabulário técnico de hardware
+# — por isso os valores dos enums (que são slugs em inglês/maiúsculo, ex. "GPU_BOUND",
+# "CUSTO_BENEFICIO") nunca aparecem direto no resumo, só através destes mapas.
+_PROFILE_SUMMARY_LABELS = {
+    UpgradeProfile.ECONOMICO: "economia máxima",
+    UpgradeProfile.CUSTO_BENEFICIO: "melhor custo-benefício",
+    UpgradeProfile.ALTO_DESEMPENHO: "alto desempenho",
+    UpgradeProfile.UPGRADE_COMPLETO: "upgrade completo",
+}
+
+_BOTTLENECK_SUMMARY_LABELS = {
+    BottleneckVerdict.CPU_BOUND: "o processador é o que mais está segurando seu desempenho hoje",
+    BottleneckVerdict.GPU_BOUND: "a placa de vídeo é o que mais está segurando seu desempenho hoje",
+    BottleneckVerdict.BALANCED: "processador e placa de vídeo estão equilibrados entre si, sem um vilão claro",
+}
+
+_SLOT_SUMMARY_LABELS = {
+    "cpu": "o processador",
+    "gpu": "a placa de vídeo",
+    "motherboard": "a placa-mãe",
+    "ram": "a memória RAM",
+    "storage": "o armazenamento",
+    "psu": "a fonte de alimentação",
+    "case": "o gabinete",
+    "cooler": "o cooler",
+}
 
 # Ordem de severidade (mais grave primeiro) usada para resumir vários CompatibilityResult
 # em um único status representativo de uma recomendação.
@@ -393,19 +421,40 @@ def _recommend_storage(db: Session, storage, motherboard, profile: UpgradeProfil
     return rec, results
 
 
+def _join_pt(items: list[str]) -> str:
+    if len(items) == 1:
+        return items[0]
+    return ", ".join(items[:-1]) + " e " + items[-1]
+
+
 def _build_summary(recommendations, bottleneck, bundle, profile: UpgradeProfile) -> str:
+    profile_label = _PROFILE_SUMMARY_LABELS[profile]
+
     if not recommendations:
         return (
-            "Nenhum componente foi identificado como limitante para o perfil de upgrade "
-            f"'{profile.value}' com os dados informados."
+            f"Boa notícia: para o perfil de {profile_label}, seu computador atual já dá "
+            "conta do recado — não encontramos nenhuma peça que precise ser trocada agora."
         )
+
+    count = len(recommendations)
+    piece_word = "peça" if count == 1 else "peças"
     parts = [
-        f"{len(recommendations)} recomendação(ões) identificada(s) para o perfil '{profile.value}'."
+        f"Encontramos {count} {piece_word} que vale a pena trocar, pensando em {profile_label}."
     ]
-    if bottleneck is not None:
-        parts.append(f"Diagnóstico de gargalo: {bottleneck.verdict.value}.")
+
+    bottleneck_label = (
+        _BOTTLENECK_SUMMARY_LABELS.get(bottleneck.verdict) if bottleneck is not None else None
+    )
+    if bottleneck_label is not None:
+        parts.append(f"Hoje, {bottleneck_label}.")
+
     if bundle is not None:
-        parts.append("Upgrade de conjunto necessário: " + ", ".join(bundle.components) + ".")
+        bundle_labels = [_SLOT_SUMMARY_LABELS.get(c, c) for c in bundle.components]
+        parts.append(
+            "Atenção: essas trocas só funcionam juntas — não dá para trocar uma peça sem "
+            "trocar também " + _join_pt(bundle_labels) + "."
+        )
+
     return " ".join(parts)
 
 
