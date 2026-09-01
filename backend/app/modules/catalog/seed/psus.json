@@ -1,0 +1,50 @@
+[
+  {
+    "manufacturer": null,
+    "model_name": "500W 80+ Bronze (referência)",
+    "wattage": 500,
+    "efficiency_rating": "80+ Bronze",
+    "modular": "NONE",
+    "form_factor": "ATX",
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "550W 80+ Bronze Semi-Modular (referência)",
+    "wattage": 550,
+    "efficiency_rating": "80+ Bronze",
+    "modular": "SEMI",
+    "form_factor": "ATX",
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "650W 80+ Gold Full-Modular (referência)",
+    "wattage": 650,
+    "efficiency_rating": "80+ Gold",
+    "modular": "FULL",
+    "form_factor": "ATX",
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "750W 80+ Gold Full-Modular (referência)",
+    "wattage": 750,
+    "efficiency_rating": "80+ Gold",
+    "modular": "FULL",
+    "form_factor": "ATX",
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  }
+]

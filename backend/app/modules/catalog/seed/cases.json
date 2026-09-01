@@ -1,0 +1,29 @@
+[
+  {
+    "manufacturer": "Cooler Master",
+    "model_name": "MasterBox Q300L",
+    "supported_form_factors": ["MICRO_ATX", "MINI_ITX"],
+    "max_gpu_length_mm": 360,
+    "max_cooler_height_mm": 159,
+    "release_date": "2018-01-01",
+    "notes": "Gabinete compacto popular em builds de entrada/upgrade no Brasil."
+  },
+  {
+    "manufacturer": "Lian Li",
+    "model_name": "Lancool 215",
+    "supported_form_factors": ["ATX", "MICRO_ATX", "MINI_ITX"],
+    "max_gpu_length_mm": 405,
+    "max_cooler_height_mm": 176,
+    "release_date": "2020-06-01",
+    "notes": "Boa ventilação e espaço amplo para GPUs modernas e coolers de ar grandes."
+  },
+  {
+    "manufacturer": "NZXT",
+    "model_name": "H510",
+    "supported_form_factors": ["ATX", "MICRO_ATX", "MINI_ITX"],
+    "max_gpu_length_mm": 381,
+    "max_cooler_height_mm": 165,
+    "release_date": "2019-01-01",
+    "notes": null
+  }
+]

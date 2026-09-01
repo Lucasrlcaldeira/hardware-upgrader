@@ -1,0 +1,58 @@
+[
+  {
+    "manufacturer": null,
+    "model_name": "SATA SSD 480GB (referência)",
+    "storage_type": "SATA_SSD",
+    "interface": "SATA III (6 Gb/s)",
+    "form_factor": "2.5\"",
+    "capacity_gb": 480,
+    "read_speed_mbps": 550,
+    "write_speed_mbps": 500,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência; limite de barramento SATA III é ~550MB/s independente do modelo."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "NVMe SSD PCIe 3.0 500GB (referência)",
+    "storage_type": "NVME_SSD",
+    "interface": "PCIe 3.0 x4 (NVMe)",
+    "form_factor": "M.2 2280",
+    "capacity_gb": 500,
+    "read_speed_mbps": 3500,
+    "write_speed_mbps": 3000,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência; velocidades variam por controlador/NAND do modelo específico."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "NVMe SSD PCIe 4.0 1TB (referência)",
+    "storage_type": "NVME_SSD",
+    "interface": "PCIe 4.0 x4 (NVMe)",
+    "form_factor": "M.2 2280",
+    "capacity_gb": 1000,
+    "read_speed_mbps": 7000,
+    "write_speed_mbps": 5000,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "HDD 1TB 7200RPM (referência)",
+    "storage_type": "HDD",
+    "interface": "SATA III (6 Gb/s)",
+    "form_factor": "3.5\"",
+    "capacity_gb": 1000,
+    "read_speed_mbps": 150,
+    "write_speed_mbps": 150,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência."
+  }
+]

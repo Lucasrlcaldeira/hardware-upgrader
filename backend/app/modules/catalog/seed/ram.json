@@ -1,0 +1,54 @@
+[
+  {
+    "manufacturer": null,
+    "model_name": "DDR4-3200 16GB (2x8GB) CL16 (referência)",
+    "memory_type": "DDR4",
+    "speed_mhz": 3200,
+    "capacity_gb_per_module": 8,
+    "modules_in_kit": 2,
+    "cas_latency": 16,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Kit genérico de referência — timings variam por fabricante específico."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "DDR4-3600 32GB (2x16GB) CL18 (referência)",
+    "memory_type": "DDR4",
+    "speed_mhz": 3600,
+    "capacity_gb_per_module": 16,
+    "modules_in_kit": 2,
+    "cas_latency": 18,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Kit genérico de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "DDR5-5200 32GB (2x16GB) CL40 (referência)",
+    "memory_type": "DDR5",
+    "speed_mhz": 5200,
+    "capacity_gb_per_module": 16,
+    "modules_in_kit": 2,
+    "cas_latency": 40,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Kit genérico de referência."
+  },
+  {
+    "manufacturer": null,
+    "model_name": "DDR5-6000 32GB (2x16GB) CL30 (referência)",
+    "memory_type": "DDR5",
+    "speed_mhz": 6000,
+    "capacity_gb_per_module": 16,
+    "modules_in_kit": 2,
+    "cas_latency": 30,
+    "release_date": null,
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Faixa considerada 'sweet spot' de custo-benefício para plataformas AM5 no lançamento — via perfil EXPO/XMP."
+  }
+]

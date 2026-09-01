@@ -1,0 +1,131 @@
+[
+  {
+    "manufacturer": "Genérico",
+    "model_name": "AM4 B450 (referência de chipset)",
+    "socket": "AM4",
+    "chipset": "B450",
+    "form_factor": "ATX",
+    "memory_type": "DDR4",
+    "memory_slots": 4,
+    "max_memory_gb": 64,
+    "max_memory_speed_mhz": 3200,
+    "pcie_slots": [
+      {"version": "3.0", "lanes": 16, "count": 1},
+      {"version": "3.0", "lanes": 1, "count": 2}
+    ],
+    "m2_slots": 1,
+    "supports_cpu_generations": ["Zen", "Zen+", "Zen 2"],
+    "bios_notes": "Suporte a Zen 3 (Ryzen 5000) existe em parte das placas B450, mas depende de atualização de BIOS específica do fabricante — nem todo modelo recebeu esse update, e algumas versões de BIOS mais novas derrubaram suporte a CPUs Zen/Zen+ antigas por limite de espaço na ROM. Confirme o modelo exato na página de suporte do fabricante.",
+    "release_date": "2018-09-01",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência para o chipset B450 — specs físicas (slots, VRM) variam por modelo/fabricante específico."
+  },
+  {
+    "manufacturer": "Genérico",
+    "model_name": "AM4 B550 (referência de chipset)",
+    "socket": "AM4",
+    "chipset": "B550",
+    "form_factor": "ATX",
+    "memory_type": "DDR4",
+    "memory_slots": 4,
+    "max_memory_gb": 128,
+    "max_memory_speed_mhz": 3200,
+    "pcie_slots": [
+      {"version": "4.0", "lanes": 16, "count": 1},
+      {"version": "3.0", "lanes": 1, "count": 2}
+    ],
+    "m2_slots": 2,
+    "supports_cpu_generations": ["Zen 2", "Zen 3"],
+    "bios_notes": "Não suporta CPUs Zen/Zen+ (Ryzen 1000/2000).",
+    "release_date": "2020-06-16",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência para o chipset B550."
+  },
+  {
+    "manufacturer": "Genérico",
+    "model_name": "AM4 X570 (referência de chipset)",
+    "socket": "AM4",
+    "chipset": "X570",
+    "form_factor": "ATX",
+    "memory_type": "DDR4",
+    "memory_slots": 4,
+    "max_memory_gb": 128,
+    "max_memory_speed_mhz": 3200,
+    "pcie_slots": [
+      {"version": "4.0", "lanes": 16, "count": 1},
+      {"version": "4.0", "lanes": 1, "count": 2}
+    ],
+    "m2_slots": 2,
+    "supports_cpu_generations": ["Zen 2", "Zen 3"],
+    "bios_notes": "Não suporta CPUs Zen/Zen+ (Ryzen 1000/2000).",
+    "release_date": "2019-07-07",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência para o chipset X570."
+  },
+  {
+    "manufacturer": "Genérico",
+    "model_name": "AM5 B650 (referência de chipset)",
+    "socket": "AM5",
+    "chipset": "B650",
+    "form_factor": "ATX",
+    "memory_type": "DDR5",
+    "memory_slots": 4,
+    "max_memory_gb": 128,
+    "max_memory_speed_mhz": null,
+    "pcie_slots": [
+      {"version": "4.0", "lanes": 16, "count": 1}
+    ],
+    "m2_slots": 2,
+    "supports_cpu_generations": ["Zen 4"],
+    "bios_notes": null,
+    "release_date": "2022-09-27",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica de referência para o chipset B650. Velocidade máxima de memória oficial (JEDEC) é mais baixa; kits DDR5 mais rápidos rodam via overclock/EXPO e dependem da placa/CPU específicos, por isso não incluída aqui como valor fixo."
+  },
+  {
+    "manufacturer": "Genérico",
+    "model_name": "LGA1700 B660 DDR4 (referência de chipset)",
+    "socket": "LGA1700",
+    "chipset": "B660",
+    "form_factor": "ATX",
+    "memory_type": "DDR4",
+    "memory_slots": 4,
+    "max_memory_gb": 128,
+    "max_memory_speed_mhz": 3200,
+    "pcie_slots": [
+      {"version": "4.0", "lanes": 16, "count": 1}
+    ],
+    "m2_slots": 2,
+    "supports_cpu_generations": ["12ª geração (Alder Lake)", "13ª geração (Raptor Lake)"],
+    "bios_notes": "Placas B660 vendidas antes do lançamento da 13ª geração podem exigir atualização de BIOS para suportar essas CPUs.",
+    "release_date": "2022-01-04",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica — modelos B660 existem tanto em variante DDR4 quanto DDR5; esta é a variante DDR4."
+  },
+  {
+    "manufacturer": "Genérico",
+    "model_name": "LGA1700 B660 DDR5 (referência de chipset)",
+    "socket": "LGA1700",
+    "chipset": "B660",
+    "form_factor": "ATX",
+    "memory_type": "DDR5",
+    "memory_slots": 4,
+    "max_memory_gb": 128,
+    "max_memory_speed_mhz": null,
+    "pcie_slots": [
+      {"version": "4.0", "lanes": 16, "count": 1}
+    ],
+    "m2_slots": 2,
+    "supports_cpu_generations": ["12ª geração (Alder Lake)", "13ª geração (Raptor Lake)"],
+    "bios_notes": "Placas B660 vendidas antes do lançamento da 13ª geração podem exigir atualização de BIOS para suportar essas CPUs.",
+    "release_date": "2022-01-04",
+    "price_range_brl_min": null,
+    "price_range_brl_max": null,
+    "notes": "Entrada genérica — variante DDR5 do chipset B660."
+  }
+]

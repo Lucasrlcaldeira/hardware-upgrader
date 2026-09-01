@@ -1,0 +1,35 @@
+[
+  {
+    "manufacturer": "AMD",
+    "model_name": "Wraith Stealth",
+    "cooler_type": "AIR",
+    "supported_sockets": ["AM4"],
+    "height_mm": 54,
+    "radiator_size_mm": null,
+    "tdp_rating_watts": 65,
+    "release_date": "2017-01-01",
+    "notes": "Cooler stock que acompanha CPUs Ryzen de até 65W; insuficiente para modelos acima disso."
+  },
+  {
+    "manufacturer": "Cooler Master",
+    "model_name": "Hyper 212 Black Edition",
+    "cooler_type": "AIR",
+    "supported_sockets": ["AM4", "AM5", "LGA1700", "LGA1200", "LGA1151"],
+    "height_mm": 159,
+    "radiator_size_mm": null,
+    "tdp_rating_watts": 150,
+    "release_date": "2020-01-01",
+    "notes": "Upgrade de cooler a ar mais recomendado da faixa de entrada; kits de montagem cobrem a maioria dos sockets modernos."
+  },
+  {
+    "manufacturer": "NZXT",
+    "model_name": "Kraken X53",
+    "cooler_type": "AIO_LIQUID",
+    "supported_sockets": ["AM4", "AM5", "LGA1700", "LGA1200", "LGA1151"],
+    "height_mm": null,
+    "radiator_size_mm": 240,
+    "tdp_rating_watts": 250,
+    "release_date": "2020-01-01",
+    "notes": "AIO 240mm; verificar suporte de montagem de radiador no gabinete antes de comprar."
+  }
+]
