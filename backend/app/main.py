@@ -8,6 +8,7 @@ from app.modules.analysis.router import router as analysis_router
 from app.modules.catalog.router import router as catalog_router
 from app.modules.compatibility.router import router as compatibility_router
 from app.modules.detection.router import router as detection_router
+from app.modules.games.router import router as games_router
 from app.modules.performance.router import router as performance_router
 from app.modules.recommendation.router import router as recommendation_router
 from app.modules.users.router import router as users_router
@@ -37,6 +38,7 @@ app.include_router(performance_router)
 app.include_router(recommendation_router)
 app.include_router(users_router)
 app.include_router(analysis_router)
+app.include_router(games_router)
 
 
 @app.get("/health", tags=["health"])

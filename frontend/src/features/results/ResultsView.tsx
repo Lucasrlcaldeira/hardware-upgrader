@@ -1,5 +1,6 @@
 import { Badge } from '../../components/ui/Badge'
 import { Card } from '../../components/ui/Card'
+import { GameFpsExplorer } from './GameFpsExplorer'
 import type { CombinedAnalysisResult } from './useRunAnalysis'
 import {
   BOTTLENECK_VERDICT_LABELS,
@@ -20,7 +21,7 @@ export function ResultsView({
   result: CombinedAnalysisResult
   onReset: () => void
 }) {
-  const { compatibility, bottleneck, bottleneckNote, recommendation } = result
+  const { system, compatibility, bottleneck, bottleneckNote, recommendation } = result
 
   return (
     <div className="space-y-4">
@@ -158,6 +159,8 @@ export function ResultsView({
           </div>
         )}
       </section>
+
+      <GameFpsExplorer system={system} recommendations={recommendation.recommendations} />
 
       <button
         type="button"

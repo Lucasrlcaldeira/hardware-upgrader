@@ -1,0 +1,622 @@
+[
+  {
+    "game_title": "Red Dead Redemption 2",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 85,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Red Dead Redemption 2",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 64,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Red Dead Redemption 2",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 55,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site, também com i7-13700K, mediu 63 FPS para esta mesma GPU/jogo — a variação real entre execuções de teste é maior do que se poderia supor a partir de um único número."
+  },
+  {
+    "game_title": "Red Dead Redemption 2",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 66,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hogwarts Legacy",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 71,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hogwarts Legacy",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 63,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hogwarts Legacy",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 63,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hogwarts Legacy",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 75,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Mesmo valor (75 FPS) confirmado de forma consistente em outros dois artigos do mesmo site."
+  },
+  {
+    "game_title": "Cyberpunk 2077",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 69,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site (CPU diferente, Ryzen 7 7800X3D) mediu 87 FPS para esta mesma GPU/jogo — variação real considerável entre bancadas de teste."
+  },
+  {
+    "game_title": "Cyberpunk 2077",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 57,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Cyberpunk 2077",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 37,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Cyberpunk 2077",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 68,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Cyberpunk 2077",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 57,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site rotula este mesmo valor (57 FPS) como testado 'com Ray Tracing ativado', outro não menciona RT para o número idêntico — não é possível confirmar com certeza se há RT ligado neste resultado específico."
+  },
+  {
+    "game_title": "Forza Horizon 5",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 101,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Forza Horizon 5",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 91,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Forza Horizon 5",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 67,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Forza Horizon 5",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 67,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Forza Horizon 5",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 76,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hitman 3",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 142,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hitman 3",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 128,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Hitman 3",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 140,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-6600-vs-rtx-2060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Resident Evil 4",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 64,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site (CPU Ryzen 7 7800X3D) mediu 99 FPS para esta mesma GPU/jogo — o benchmark de Resident Evil 4 varia bastante por área/cena testada, então a diferença pode refletir isso além da CPU."
+  },
+  {
+    "game_title": "Resident Evil 4",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 73,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Resident Evil 4",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 48,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Spider-Man: Miles Morales",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 77,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Spider-Man: Miles Morales",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 74,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Spider-Man: Miles Morales",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 63,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Spider-Man: Miles Morales",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 81,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Returnal",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 95,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site (CPU Ryzen 7 7800X3D) mediu 76 FPS para esta mesma GPU/jogo — variação real entre bancadas de teste."
+  },
+  {
+    "game_title": "Returnal",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 83,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "A Plague Tale: Requiem",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 68,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "A Plague Tale: Requiem",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 56,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "A Plague Tale: Requiem",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 49,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "A Plague Tale: Requiem",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 50,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "The Last of Us Part I",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 68,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "The Last of Us Part I",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1080P",
+    "avg_fps": 66,
+    "test_cpu_model": "AMD Ryzen 7 7700X",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Elden Ring",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 66,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Dying Light 2",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 64,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Dying Light 2",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 73,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "God of War (2018)",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 79,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-ti-vs-rx-6600/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "God of War (2018)",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 72,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Far Cry 6",
+    "gpu_model_name": "GeForce GTX 1660 Super",
+    "resolution": "1080P",
+    "avg_fps": 70,
+    "test_cpu_model": "AMD Ryzen 7 5800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-2060-vs-gtx-1660-super/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Far Cry 6",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 92,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-6600-vs-rtx-2060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Forza Horizon 4",
+    "gpu_model_name": "Radeon RX 6600",
+    "resolution": "1080P",
+    "avg_fps": 166,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-6600-vs-rtx-2060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Diablo 4",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 206,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-gtx-1060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Mesmo valor (206 FPS) confirmado em outro artigo do mesmo site com CPU diferente (i5-13600K)."
+  },
+  {
+    "game_title": "PUBG",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 146,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-gtx-1060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Star Wars Jedi: Survivor",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 62,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Star Wars Jedi: Survivor",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 44,
+    "test_cpu_model": "AMD Ryzen 7 7800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-arc-a770/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Fortnite",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 63,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Fortnite",
+    "gpu_model_name": "Radeon RX 7600",
+    "resolution": "1080P",
+    "avg_fps": 83,
+    "test_cpu_model": "AMD Ryzen 7 7800X3D",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rx-7600-vs-arc-a770/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. O artigo também lista 43 FPS para a mesma GPU com 'Epic + Ray Tracing' — usamos o valor em configuração alta sem RT (83) por ser o mais comparável ao número da RTX 4060 acima, cujo preset exato de RT também é incerto."
+  },
+  {
+    "game_title": "Sons of the Forest",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 72,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Call of Duty: Warzone 2.0",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 88,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Outro artigo do mesmo site lista 88 FPS para a RTX 4060 sob o título 'Call of Duty Modern Warfare II' — mesmo motor/engine, possivelmente o mesmo teste reaproveitado sob nomes diferentes."
+  },
+  {
+    "game_title": "Call of Duty: Warzone 2.0",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 64,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "CS:GO",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 439,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Mesmo valor (439 FPS) confirmado em outro artigo do mesmo site com CPU diferente (i7-13700K)."
+  },
+  {
+    "game_title": "Grand Theft Auto V",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 82,
+    "test_cpu_model": "Intel Core i5-13600K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-3050/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado. Mesmo valor (82 FPS) confirmado em outro artigo do mesmo site com CPU diferente (i7-13700K)."
+  },
+  {
+    "game_title": "ARK: Survival Evolved",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 98,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-gtx-1060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Apex Legends",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 182,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-gtx-1060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Dead Island 2",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 70,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "The Witcher 3",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 52,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "The Witcher 3",
+    "gpu_model_name": "GeForce RTX 3060",
+    "resolution": "1440P",
+    "avg_fps": 37,
+    "test_cpu_model": "Intel Core i9-13900K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/geforce-gtx-1080-ti-vs-rtx-3060/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Total War: Warhammer III",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 80,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  },
+  {
+    "game_title": "Redfall",
+    "gpu_model_name": "GeForce RTX 4060",
+    "resolution": "1080P",
+    "avg_fps": 93,
+    "test_cpu_model": "Intel Core i7-13700K",
+    "source_name": "Tech4Gamers",
+    "source_url": "https://tech4gamers.com/rtx-4060-vs-rtx-4070/",
+    "quality_preset_note": "Preset de qualidade não declarado explicitamente no artigo; a metodologia geral do site descreve testar jogos AAA 'com configurações ultra' — tratamos como provável Ultra, mas não confirmado individualmente para este resultado."
+  }
+]

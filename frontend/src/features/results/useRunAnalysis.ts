@@ -3,12 +3,13 @@ import { ApiError } from '../../api/client'
 import { checkCompatibility } from '../../api/compatibility'
 import { checkBottleneck } from '../../api/performance'
 import { generateRecommendations } from '../../api/recommendation'
-import type { CompatibilityCheckResponse } from '../../types/compatibility'
+import type { CompatibilityCheckResponse, SystemSnapshot } from '../../types/compatibility'
 import type { BottleneckAnalysisResult } from '../../types/performance'
 import type { RecommendationResponse } from '../../types/recommendation'
 import type { AnalysisConfig } from '../system/SystemSelectionStep'
 
 export interface CombinedAnalysisResult {
+  system: SystemSnapshot
   compatibility: CompatibilityCheckResponse
   bottleneck: BottleneckAnalysisResult | null
   bottleneckNote: string | null
@@ -66,7 +67,7 @@ async function runAnalysis(config: AnalysisConfig): Promise<CombinedAnalysisResu
     }
   }
 
-  return { compatibility, recommendation, bottleneck, bottleneckNote }
+  return { system, compatibility, recommendation, bottleneck, bottleneckNote }
 }
 
 export function useRunAnalysis() {

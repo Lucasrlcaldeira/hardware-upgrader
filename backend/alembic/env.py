@@ -9,6 +9,7 @@ from app.core.database import Base
 # importa todos os models para popular Base.metadata antes do autogenerate
 from app.modules.analysis import models as analysis_models  # noqa: F401
 from app.modules.catalog import models as catalog_models  # noqa: F401
+from app.modules.games import models as games_models  # noqa: F401
 from app.modules.users import models as users_models  # noqa: F401
 
 # this is the Alembic Config object, which provides
