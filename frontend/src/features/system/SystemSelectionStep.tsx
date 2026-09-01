@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, type UseQueryResult } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import {
   fetchCases,
@@ -18,6 +18,7 @@ import type { GraphicsQuality, Resolution, WorkloadType } from '../../types/perf
 import type { UpgradeProfile } from '../../types/recommendation'
 import { findCatalogAutoMatch } from './autoMatch'
 import { CatalogSelect } from './CatalogSelect'
+import { ConfirmedComponentRow } from './ConfirmedComponentRow'
 import {
   GRAPHICS_QUALITY_LABELS,
   PROFILE_DESCRIPTIONS,
@@ -55,8 +56,7 @@ function ramHint(detected: HardwareSnapshot): string | null {
 
 /**
  * Tenta casar automaticamente um campo com o catálogo assim que a lista carrega — só uma
- * vez por campo (o ref evita reaplicar o auto-match depois que o usuário mexe no valor), e
- * só se o usuário ainda não tiver tocado nesse campo.
+ * vez por campo (o ref evita reaplicar depois que o usuário mexe no valor).
  */
 function useAutoMatch(
   key: keyof SystemSnapshot,
@@ -75,6 +75,14 @@ function useAutoMatch(
       setAutoMatched((prev) => ({ ...prev, [key]: true }))
     }
   }, [options, detectedValue, key, setSystem, setAutoMatched])
+}
+
+interface FieldConfig {
+  key: keyof SystemSnapshot
+  label: string
+  query: UseQueryResult<CatalogOption[]>
+  hint: string | null
+  autoMatchable: boolean
 }
 
 export function SystemSelectionStep({
@@ -129,6 +137,61 @@ export function SystemSelectionStep({
     setAutoMatched((prev) => ({ ...prev, [key]: false }))
   }
 
+  function requestEdit(key: keyof SystemSnapshot) {
+    setAutoMatched((prev) => ({ ...prev, [key]: false }))
+  }
+
+  const fields: FieldConfig[] = [
+    {
+      key: 'cpu_model_name',
+      label: 'Processador (CPU)',
+      query: cpuQuery,
+      hint: detected.cpu_model_name,
+      autoMatchable: true,
+    },
+    {
+      key: 'gpu_model_name',
+      label: 'Placa de vídeo (GPU)',
+      query: gpuQuery,
+      hint: detected.gpu_model_name,
+      autoMatchable: true,
+    },
+    {
+      key: 'motherboard_model_name',
+      label: 'Placa-mãe',
+      query: motherboardQuery,
+      hint: detected.motherboard_model_name,
+      autoMatchable: true,
+    },
+    {
+      key: 'ram_model_name',
+      label: 'Kit de memória RAM',
+      query: ramQuery,
+      hint: ramHint(detected),
+      autoMatchable: false,
+    },
+    {
+      key: 'storage_model_name',
+      label: 'Armazenamento',
+      query: storageQuery,
+      hint: detected.storage_devices[0]?.model_name ?? null,
+      autoMatchable: true,
+    },
+    {
+      key: 'psu_model_name',
+      label: 'Fonte de alimentação (PSU)',
+      query: psuQuery,
+      hint: detected.psu_model_name ?? (detected.psu_wattage ? `${detected.psu_wattage}W` : null),
+      autoMatchable: true,
+    },
+    { key: 'case_model_name', label: 'Gabinete', query: caseQuery, hint: null, autoMatchable: false },
+    { key: 'cooler_model_name', label: 'Cooler', query: coolerQuery, hint: null, autoMatchable: false },
+  ]
+
+  const isConfirmed = (f: FieldConfig) => f.autoMatchable && autoMatched[f.key] && system[f.key]
+  const confirmedFields = fields.filter(isConfirmed)
+  const pendingFields = fields.filter((f) => !isConfirmed(f))
+
   const hasAnyComponent = Object.values(system).some((v) => v)
 
   function handleSubmit() {
@@ -149,83 +212,48 @@ export function SystemSelectionStep({
           Confirme os componentes no catálogo
         </h2>
         <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-          Quando a detecção bate com um item do catálogo, já selecionamos automaticamente. Nos
-          demais casos (nenhum modelo exato encontrado, ou componentes que a detecção não
-          identifica, como RAM/armazenamento/fonte/gabinete/cooler), escolha o mais próximo —
-          ou deixe em branco o que não se aplica.
+          O que a detecção já conseguiu confirmar no catálogo aparece pronto abaixo — escolha
+          manualmente só o que sobrou (ou deixe em branco o que não se aplica).
         </p>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <CatalogSelect
-            label="Processador (CPU)"
-            options={cpuQuery.data}
-            status={cpuQuery.status}
-            value={system.cpu_model_name ?? null}
-            onChange={(v) => updateSystem('cpu_model_name', v)}
-            hint={detected.cpu_model_name}
-            autoMatched={autoMatched.cpu_model_name}
-          />
-          <CatalogSelect
-            label="Placa de vídeo (GPU)"
-            options={gpuQuery.data}
-            status={gpuQuery.status}
-            value={system.gpu_model_name ?? null}
-            onChange={(v) => updateSystem('gpu_model_name', v)}
-            hint={detected.gpu_model_name}
-            autoMatched={autoMatched.gpu_model_name}
-          />
-          <CatalogSelect
-            label="Placa-mãe"
-            options={motherboardQuery.data}
-            status={motherboardQuery.status}
-            value={system.motherboard_model_name ?? null}
-            onChange={(v) => updateSystem('motherboard_model_name', v)}
-            hint={detected.motherboard_model_name}
-            autoMatched={autoMatched.motherboard_model_name}
-          />
-          <CatalogSelect
-            label="Kit de memória RAM"
-            options={ramQuery.data}
-            status={ramQuery.status}
-            value={system.ram_model_name ?? null}
-            onChange={(v) => updateSystem('ram_model_name', v)}
-            hint={ramHint(detected)}
-          />
-          <CatalogSelect
-            label="Armazenamento"
-            options={storageQuery.data}
-            status={storageQuery.status}
-            value={system.storage_model_name ?? null}
-            onChange={(v) => updateSystem('storage_model_name', v)}
-            hint={detected.storage_devices[0]?.model_name ?? null}
-            autoMatched={autoMatched.storage_model_name}
-          />
-          <CatalogSelect
-            label="Fonte de alimentação (PSU)"
-            options={psuQuery.data}
-            status={psuQuery.status}
-            value={system.psu_model_name ?? null}
-            onChange={(v) => updateSystem('psu_model_name', v)}
-            hint={
-              detected.psu_model_name ??
-              (detected.psu_wattage ? `${detected.psu_wattage}W` : null)
-            }
-            autoMatched={autoMatched.psu_model_name}
-          />
-          <CatalogSelect
-            label="Gabinete"
-            options={caseQuery.data}
-            status={caseQuery.status}
-            value={system.case_model_name ?? null}
-            onChange={(v) => updateSystem('case_model_name', v)}
-          />
-          <CatalogSelect
-            label="Cooler"
-            options={coolerQuery.data}
-            status={coolerQuery.status}
-            value={system.cooler_model_name ?? null}
-            onChange={(v) => updateSystem('cooler_model_name', v)}
-          />
-        </div>
+
+        {confirmedFields.length > 0 && (
+          <div className="mb-4 space-y-2">
+            <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">
+              Confirmados automaticamente a partir da detecção
+            </p>
+            {confirmedFields.map((f) => (
+              <ConfirmedComponentRow
+                key={f.key}
+                label={f.label}
+                value={system[f.key] as string}
+                onEdit={() => requestEdit(f.key)}
+              />
+            ))}
+          </div>
+        )}
+
+        {pendingFields.length > 0 && (
+          <>
+            {confirmedFields.length > 0 && (
+              <p className="mb-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+                Escolha os demais componentes
+              </p>
+            )}
+            <div className="grid gap-3 sm:grid-cols-2">
+              {pendingFields.map((f) => (
+                <CatalogSelect
+                  key={f.key}
+                  label={f.label}
+                  options={f.query.data}
+                  status={f.query.status}
+                  value={(system[f.key] as string | null | undefined) ?? null}
+                  onChange={(v) => updateSystem(f.key, v)}
+                  hint={f.hint}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </Card>
 
       <Card>

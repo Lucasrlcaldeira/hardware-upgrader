@@ -7,7 +7,6 @@ export function CatalogSelect({
   value,
   onChange,
   hint,
-  autoMatched,
 }: {
   label: string
   options: CatalogOption[] | undefined
@@ -15,7 +14,6 @@ export function CatalogSelect({
   value: string | null
   onChange: (value: string | null) => void
   hint?: string | null
-  autoMatched?: boolean
 }) {
   return (
     <label className="block">
@@ -36,13 +34,7 @@ export function CatalogSelect({
       {status === 'error' && (
         <p className="mt-1 text-xs text-red-600 dark:text-red-400">Falha ao carregar opções.</p>
       )}
-      {autoMatched && value ? (
-        <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400">
-          Selecionado automaticamente a partir da detecção.
-        </p>
-      ) : (
-        hint && <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">Detectado: {hint}</p>
-      )}
+      {hint && <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">Detectado: {hint}</p>}
     </label>
   )
 }
