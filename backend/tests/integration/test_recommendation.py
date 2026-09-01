@@ -195,3 +195,138 @@ def test_404_for_unknown_component_in_system(client):
         json={"system": {"cpu_model_name": "Não Existe"}, "profile": "ECONOMICO"},
     )
     assert response.status_code == 404
+
+
+def test_cross_socket_cpu_without_motherboard_still_flags_bundle(client):
+    """Regressão: recomendar uma CPU de outro socket sem a placa-mãe informada nunca pode
+    ficar em silêncio sobre a troca de placa — mesmo sem saber o modelo exato dela."""
+    _import(
+        client,
+        "cpu",
+        [
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Fraca",
+                "socket": "AM4",
+                "performance_tier": 15,
+            },
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Forte AM5",
+                "socket": "AM5",
+                "performance_tier": 90,
+                "price_range_brl_min": 2000,
+                "price_range_brl_max": 2200,
+            },
+        ],
+    )
+    _import(
+        client,
+        "gpu",
+        [{"manufacturer": "AMD", "model_name": "GPU Forte", "performance_tier": 80}],
+    )
+
+    response = client.post(
+        "/recommendation/generate",
+        json={
+            "system": {"cpu_model_name": "CPU Fraca", "gpu_model_name": "GPU Forte"},
+            "profile": "CUSTO_BENEFICIO",
+            "resolution": "1080P",
+            "graphics_quality": "LOW",
+        },
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["bottleneck"]["verdict"] == "CPU_BOUND"
+    cpu_rec = next(r for r in body["recommendations"] if r["slot"] == "cpu")
+    assert cpu_rec["recommended_model_name"] == "CPU Forte AM5"
+    assert "motherboard" in cpu_rec["additional_required_components"]
+    assert cpu_rec["compatibility_status"] == "INCOMPATIVEL"
+    assert body["bundle"] is not None
+    assert "motherboard" in body["bundle"]["components"]
+
+
+def test_prefers_same_socket_cpu_without_motherboard_when_available(client):
+    """Sem placa-mãe informada, o socket da CPU atual ainda deve ser usado para preferir um
+    upgrade que não force troca de placa, quando existir uma opção assim no catálogo."""
+    _import(
+        client,
+        "cpu",
+        [
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Fraca",
+                "socket": "AM4",
+                "performance_tier": 15,
+            },
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Media AM4",
+                "socket": "AM4",
+                "performance_tier": 40,
+            },
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Forte AM5",
+                "socket": "AM5",
+                "performance_tier": 90,
+            },
+        ],
+    )
+    _import(
+        client,
+        "gpu",
+        [{"manufacturer": "AMD", "model_name": "GPU Forte", "performance_tier": 80}],
+    )
+
+    response = client.post(
+        "/recommendation/generate",
+        json={
+            "system": {"cpu_model_name": "CPU Fraca", "gpu_model_name": "GPU Forte"},
+            "profile": "ECONOMICO",
+            "resolution": "1080P",
+            "graphics_quality": "LOW",
+        },
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    cpu_rec = next(r for r in body["recommendations"] if r["slot"] == "cpu")
+    assert cpu_rec["recommended_model_name"] == "CPU Media AM4"
+    assert cpu_rec["additional_required_components"] == []
+    assert body["bundle"] is None
+
+
+def test_ram_recommendation_keeps_current_memory_type_without_motherboard(client):
+    """Sem placa-mãe informada, nunca recomendar um tipo de memória diferente do kit atual —
+    o tipo do kit atual é o melhor proxy do que a placa realmente aceita."""
+    _import(
+        client,
+        "ram",
+        [
+            {
+                "model_name": "8GB DDR4",
+                "memory_type": "DDR4",
+                "speed_mhz": 2666,
+                "capacity_gb_per_module": 4,
+                "modules_in_kit": 2,
+            },
+            {
+                "model_name": "32GB DDR5",
+                "memory_type": "DDR5",
+                "speed_mhz": 6000,
+                "capacity_gb_per_module": 16,
+                "modules_in_kit": 2,
+            },
+        ],
+    )
+
+    response = client.post(
+        "/recommendation/generate",
+        json={"system": {"ram_model_name": "8GB DDR4"}, "profile": "ALTO_DESEMPENHO"},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["recommendations"] == []

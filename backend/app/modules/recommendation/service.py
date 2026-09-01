@@ -4,7 +4,7 @@ from app.core.exceptions import InsufficientDataError, NotFoundError
 from app.modules.catalog import service as catalog_service
 from app.modules.catalog.enums import StorageType
 from app.modules.compatibility import service as compatibility_service
-from app.modules.compatibility.enums import CompatibilityStatus
+from app.modules.compatibility.enums import CompatibilityRelation, CompatibilityStatus
 from app.modules.compatibility.schemas import CompatibilityResult
 from app.modules.performance import service as performance_service
 from app.modules.performance.schemas import BottleneckAnalysisRequest, BottleneckAnalysisResult
@@ -137,7 +137,11 @@ def _pick_cpu_candidate(db: Session, current_cpu, motherboard, profile: UpgradeP
 
     # Para os perfis mais conservadores, priorizamos manter o socket atual (evita forçar
     # troca de placa-mãe); perfis agressivos podem cruzar plataforma em busca do topo.
-    same_socket = [c for c in candidates if motherboard is None or c.socket == motherboard.socket]
+    # O socket da CPU atual é conhecido mesmo sem o modelo exato da placa-mãe — ela só
+    # funciona no socket da placa em que está instalada — então usamos isso como o socket
+    # "atual" em vez de tratar placa-mãe desconhecida como "qualquer socket serve".
+    current_socket = motherboard.socket if motherboard is not None else current_cpu.socket
+    same_socket = [c for c in candidates if c.socket == current_socket]
 
     if profile == UpgradeProfile.ECONOMICO:
         pool = same_socket or candidates
@@ -179,6 +183,23 @@ def _recommend_cpu(
     results: list[CompatibilityResult] = []
     if motherboard is not None:
         results.append(compatibility_service.check_cpu_motherboard(candidate, motherboard))
+    elif candidate.socket != cpu.socket:
+        # Placa-mãe não informada, mas o socket da CPU recomendada difere do socket da CPU
+        # atual — isso exige troca de placa-mãe em qualquer plataforma, independentemente do
+        # modelo exato dela (que não temos). Nunca fica silencioso só por falta desse dado.
+        results.append(
+            CompatibilityResult(
+                relation=CompatibilityRelation.CPU_MOTHERBOARD,
+                status=CompatibilityStatus.INCOMPATIVEL,
+                reason=(
+                    f"Este processador usa o socket {candidate.socket}, diferente do socket "
+                    f"{cpu.socket} da sua CPU atual — isso exige trocar também a placa-mãe "
+                    "(modelo exato não informado, mas a troca de socket é obrigatória em "
+                    "qualquer placa)."
+                ),
+                additional_required_components=["motherboard"],
+            )
+        )
 
     additional = sorted({c for r in results for c in r.additional_required_components})
     limitations = [r.reason for r in results if r.status != CompatibilityStatus.COMPATIVEL]
@@ -272,9 +293,13 @@ def _recommend_ram(db: Session, ram, motherboard, profile: UpgradeProfile):
         else _MIN_RAM_CAPACITY_GB
     )
 
-    pool = catalog_service.list_ram_kits(
-        db, memory_type=motherboard.memory_type.value if motherboard is not None else None
+    # Sem a placa-mãe, o tipo de memória do kit atual (DDR4/DDR5...) é o melhor proxy do que
+    # a placa suporta — o kit só funciona no tipo que a placa aceita. Nunca recomendamos um
+    # tipo diferente sem confirmar a placa, mesmo em perfis mais agressivos.
+    current_memory_type = (
+        motherboard.memory_type.value if motherboard is not None else ram.memory_type.value
     )
+    pool = catalog_service.list_ram_kits(db, memory_type=current_memory_type)
     pool = [
         k
         for k in pool
