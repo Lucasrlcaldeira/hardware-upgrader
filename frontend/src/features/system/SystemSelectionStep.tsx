@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useRef, useState } from 'react'
 import {
   fetchCases,
   fetchCoolers,
@@ -10,10 +11,12 @@ import {
   fetchStorage,
 } from '../../api/catalog'
 import { Card } from '../../components/ui/Card'
+import type { CatalogOption } from '../../types/catalog'
 import type { SystemSnapshot } from '../../types/compatibility'
 import type { HardwareSnapshot } from '../../types/detection'
 import type { GraphicsQuality, Resolution, WorkloadType } from '../../types/performance'
 import type { UpgradeProfile } from '../../types/recommendation'
+import { findCatalogAutoMatch } from './autoMatch'
 import { CatalogSelect } from './CatalogSelect'
 import {
   GRAPHICS_QUALITY_LABELS,
@@ -50,6 +53,30 @@ function ramHint(detected: HardwareSnapshot): string | null {
   return parts.join(' ')
 }
 
+/**
+ * Tenta casar automaticamente um campo com o catálogo assim que a lista carrega — só uma
+ * vez por campo (o ref evita reaplicar o auto-match depois que o usuário mexe no valor), e
+ * só se o usuário ainda não tiver tocado nesse campo.
+ */
+function useAutoMatch(
+  key: keyof SystemSnapshot,
+  detectedValue: string | null | undefined,
+  options: CatalogOption[] | undefined,
+  setSystem: React.Dispatch<React.SetStateAction<SystemSnapshot>>,
+  setAutoMatched: React.Dispatch<React.SetStateAction<Partial<Record<keyof SystemSnapshot, boolean>>>>,
+) {
+  const attempted = useRef(false)
+  useEffect(() => {
+    if (attempted.current || !options) return
+    attempted.current = true
+    const match = findCatalogAutoMatch(detectedValue, options)
+    if (match) {
+      setSystem((prev) => ({ ...prev, [key]: match.model_name }))
+      setAutoMatched((prev) => ({ ...prev, [key]: true }))
+    }
+  }, [options, detectedValue, key, setSystem, setAutoMatched])
+}
+
 export function SystemSelectionStep({
   detected,
   onAnalyze,
@@ -60,14 +87,46 @@ export function SystemSelectionStep({
   isSubmitting: boolean
 }) {
   const [system, setSystem] = useState<SystemSnapshot>({})
+  const [autoMatched, setAutoMatched] = useState<Partial<Record<keyof SystemSnapshot, boolean>>>({})
   const [profile, setProfile] = useState<UpgradeProfile>('CUSTO_BENEFICIO')
   const [resolution, setResolution] = useState<Resolution>('1080P')
   const [graphicsQuality, setGraphicsQuality] = useState<GraphicsQuality>('HIGH')
   const [targetFps, setTargetFps] = useState('')
   const [workloadType, setWorkloadType] = useState<WorkloadType>('GAMING')
 
+  const cpuQuery = useQuery({ queryKey: ['catalog-cpus'], queryFn: fetchCpus })
+  const gpuQuery = useQuery({ queryKey: ['catalog-gpus'], queryFn: fetchGpus })
+  const motherboardQuery = useQuery({ queryKey: ['catalog-motherboards'], queryFn: fetchMotherboards })
+  const ramQuery = useQuery({ queryKey: ['catalog-ram'], queryFn: fetchRamKits })
+  const storageQuery = useQuery({ queryKey: ['catalog-storage'], queryFn: fetchStorage })
+  const psuQuery = useQuery({ queryKey: ['catalog-psus'], queryFn: fetchPsus })
+  const caseQuery = useQuery({ queryKey: ['catalog-cases'], queryFn: fetchCases })
+  const coolerQuery = useQuery({ queryKey: ['catalog-coolers'], queryFn: fetchCoolers })
+
+  // RAM/gabinete/cooler nunca chegam da detecção como um "modelo" comparável ao catálogo
+  // (RAM vem como capacidade/frequência crua; gabinete e cooler não são detectados) — só
+  // tentamos auto-match nos campos onde a detecção de fato devolve uma string de modelo.
+  useAutoMatch('cpu_model_name', detected.cpu_model_name, cpuQuery.data, setSystem, setAutoMatched)
+  useAutoMatch('gpu_model_name', detected.gpu_model_name, gpuQuery.data, setSystem, setAutoMatched)
+  useAutoMatch(
+    'motherboard_model_name',
+    detected.motherboard_model_name,
+    motherboardQuery.data,
+    setSystem,
+    setAutoMatched,
+  )
+  useAutoMatch(
+    'storage_model_name',
+    detected.storage_devices[0]?.model_name,
+    storageQuery.data,
+    setSystem,
+    setAutoMatched,
+  )
+  useAutoMatch('psu_model_name', detected.psu_model_name, psuQuery.data, setSystem, setAutoMatched)
+
   function updateSystem(key: keyof SystemSnapshot, value: string | null) {
     setSystem((prev) => ({ ...prev, [key]: value }))
+    setAutoMatched((prev) => ({ ...prev, [key]: false }))
   }
 
   const hasAnyComponent = Object.values(system).some((v) => v)
@@ -90,73 +149,79 @@ export function SystemSelectionStep({
           Confirme os componentes no catálogo
         </h2>
         <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-          A detecção automática não identifica o modelo exato de RAM, armazenamento, fonte,
-          gabinete e cooler — selecione o mais próximo do catálogo para cada componente que
-          quiser incluir na análise. Deixe em branco o que não se aplica.
+          Quando a detecção bate com um item do catálogo, já selecionamos automaticamente. Nos
+          demais casos (nenhum modelo exato encontrado, ou componentes que a detecção não
+          identifica, como RAM/armazenamento/fonte/gabinete/cooler), escolha o mais próximo —
+          ou deixe em branco o que não se aplica.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <CatalogSelect
             label="Processador (CPU)"
-            queryKey="catalog-cpus"
-            fetcher={fetchCpus}
+            options={cpuQuery.data}
+            status={cpuQuery.status}
             value={system.cpu_model_name ?? null}
             onChange={(v) => updateSystem('cpu_model_name', v)}
             hint={detected.cpu_model_name}
+            autoMatched={autoMatched.cpu_model_name}
           />
           <CatalogSelect
             label="Placa de vídeo (GPU)"
-            queryKey="catalog-gpus"
-            fetcher={fetchGpus}
+            options={gpuQuery.data}
+            status={gpuQuery.status}
             value={system.gpu_model_name ?? null}
             onChange={(v) => updateSystem('gpu_model_name', v)}
             hint={detected.gpu_model_name}
+            autoMatched={autoMatched.gpu_model_name}
           />
           <CatalogSelect
             label="Placa-mãe"
-            queryKey="catalog-motherboards"
-            fetcher={fetchMotherboards}
+            options={motherboardQuery.data}
+            status={motherboardQuery.status}
             value={system.motherboard_model_name ?? null}
             onChange={(v) => updateSystem('motherboard_model_name', v)}
             hint={detected.motherboard_model_name}
+            autoMatched={autoMatched.motherboard_model_name}
           />
           <CatalogSelect
             label="Kit de memória RAM"
-            queryKey="catalog-ram"
-            fetcher={fetchRamKits}
+            options={ramQuery.data}
+            status={ramQuery.status}
             value={system.ram_model_name ?? null}
             onChange={(v) => updateSystem('ram_model_name', v)}
             hint={ramHint(detected)}
           />
           <CatalogSelect
             label="Armazenamento"
-            queryKey="catalog-storage"
-            fetcher={fetchStorage}
+            options={storageQuery.data}
+            status={storageQuery.status}
             value={system.storage_model_name ?? null}
             onChange={(v) => updateSystem('storage_model_name', v)}
             hint={detected.storage_devices[0]?.model_name ?? null}
+            autoMatched={autoMatched.storage_model_name}
           />
           <CatalogSelect
             label="Fonte de alimentação (PSU)"
-            queryKey="catalog-psus"
-            fetcher={fetchPsus}
+            options={psuQuery.data}
+            status={psuQuery.status}
             value={system.psu_model_name ?? null}
             onChange={(v) => updateSystem('psu_model_name', v)}
             hint={
               detected.psu_model_name ??
               (detected.psu_wattage ? `${detected.psu_wattage}W` : null)
             }
+            autoMatched={autoMatched.psu_model_name}
           />
           <CatalogSelect
             label="Gabinete"
-            queryKey="catalog-cases"
-            fetcher={fetchCases}
+            options={caseQuery.data}
+            status={caseQuery.status}
             value={system.case_model_name ?? null}
             onChange={(v) => updateSystem('case_model_name', v)}
           />
           <CatalogSelect
             label="Cooler"
-            queryKey="catalog-coolers"
-            fetcher={fetchCoolers}
+            options={coolerQuery.data}
+            status={coolerQuery.status}
             value={system.cooler_model_name ?? null}
             onChange={(v) => updateSystem('cooler_model_name', v)}
           />
