@@ -1,6 +1,7 @@
 import logging
 import platform
 
+import pythoncom
 import wmi
 
 from app.modules.detection.collectors.base import HardwareCollector
@@ -17,12 +18,19 @@ class WindowsWmiCollector(HardwareCollector):
     o que é o comportamento correto (não inventamos o dado).
     """
 
-    def __init__(self) -> None:
-        self._wmi = wmi.WMI()
+    def _connect(self) -> "wmi.WMI":
+        # COM tem estado por thread, e o FastAPI despacha dependências/handlers síncronos
+        # para um pool de threads sem garantir a mesma thread entre chamadas dentro de uma
+        # mesma requisição — conectar uma única vez em __init__ falhava intermitentemente
+        # (x_wmi_uninitialised_thread) nas threads do pool que nunca tinham COM inicializado.
+        # CoInitialize é idempotente por thread (seguro chamar de novo), então conectamos
+        # aqui, a cada chamada, em vez de guardar uma conexão criada em outra thread.
+        pythoncom.CoInitialize()
+        return wmi.WMI()
 
     def detect_cpu(self) -> str | None:
         try:
-            cpus = self._wmi.Win32_Processor()
+            cpus = self._connect().Win32_Processor()
             return cpus[0].Name.strip() if cpus and cpus[0].Name else None
         except Exception:
             logger.exception("Falha ao detectar CPU via WMI")
@@ -30,7 +38,7 @@ class WindowsWmiCollector(HardwareCollector):
 
     def detect_gpu(self) -> str | None:
         try:
-            gpus = self._wmi.Win32_VideoController()
+            gpus = self._connect().Win32_VideoController()
             return gpus[0].Name.strip() if gpus and gpus[0].Name else None
         except Exception:
             logger.exception("Falha ao detectar GPU via WMI")
@@ -38,7 +46,7 @@ class WindowsWmiCollector(HardwareCollector):
 
     def detect_motherboard(self) -> str | None:
         try:
-            boards = self._wmi.Win32_BaseBoard()
+            boards = self._connect().Win32_BaseBoard()
             if not boards:
                 return None
             board = boards[0]
@@ -50,7 +58,7 @@ class WindowsWmiCollector(HardwareCollector):
 
     def detect_ram(self) -> RamInfo:
         try:
-            modules = self._wmi.Win32_PhysicalMemory()
+            modules = self._connect().Win32_PhysicalMemory()
             if not modules:
                 return RamInfo()
             total_bytes = sum(int(m.Capacity) for m in modules if m.Capacity)
@@ -63,7 +71,7 @@ class WindowsWmiCollector(HardwareCollector):
 
     def detect_storage(self) -> list[StorageDeviceInfo]:
         try:
-            drives = self._wmi.Win32_DiskDrive()
+            drives = self._connect().Win32_DiskDrive()
             devices = []
             for drive in drives:
                 capacity_gb = round(int(drive.Size) / (1024**3)) if drive.Size else None
