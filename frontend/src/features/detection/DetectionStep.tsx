@@ -10,7 +10,6 @@ const NUMERIC_FIELDS = new Set<keyof HardwareSnapshot>([
   'ram_capacity_gb',
   'ram_speed_mhz',
   'ram_modules',
-  'psu_wattage',
   'monitor_refresh_hz',
 ])
 
