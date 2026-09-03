@@ -207,13 +207,13 @@ export function GameFpsExplorer({
           )
         })}
       </div>
-      {futureRamApplied && (
-        <p className="mb-4 text-xs text-slate-400 dark:text-slate-500">
-          A troca de RAM está incluída na descrição do PC futuro ({ramRec?.recommended_model_name}),
-          mas não existe dado real de benchmark correlacionando RAM a FPS neste projeto — o
-          número abaixo não muda por causa dela, só reflete CPU e GPU.
-        </p>
-      )}
+      <p className="mb-4 text-xs text-slate-400 dark:text-slate-500">
+        O número de FPS abaixo vem de um benchmark real medido por GPU — só a troca de GPU no
+        "PC futuro" muda esse valor. Não existe dado real cruzando FPS com CPU ou RAM
+        específicas neste projeto, então trocar só o processador{futureRamApplied ? ' ou a RAM' : ''}
+        {' '}não altera o número mostrado; a troca de CPU pode, no máximo, acionar o aviso de
+        possível gargalo logo abaixo dele.
+      </p>
 
       <div className="mb-4 flex flex-wrap items-end gap-3">
         <label className="min-w-48 flex-1">
