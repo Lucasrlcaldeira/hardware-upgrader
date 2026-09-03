@@ -101,7 +101,8 @@ function FpsColumn({
             </p>
           )}
           <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            Medido com {mutation.data.test_cpu_model} — fonte:{' '}
+            Bancada de teste da fonte usou {mutation.data.test_cpu_model} — não é o seu
+            processador, é só o hardware que a{' '}
             <a
               href={mutation.data.source_url}
               target="_blank"
@@ -109,7 +110,8 @@ function FpsColumn({
               className="underline hover:text-slate-700 dark:hover:text-slate-200"
             >
               {mutation.data.source_name}
-            </a>
+            </a>{' '}
+            usou pra medir o teto da GPU.
           </p>
           <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
             {mutation.data.quality_preset_note}
