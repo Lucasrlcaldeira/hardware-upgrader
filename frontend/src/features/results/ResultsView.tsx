@@ -32,13 +32,13 @@ export function ResultsView({
       {recommendation.bundle && (
         <Card className="border-orange-300 bg-orange-50 dark:border-orange-800 dark:bg-orange-950/30">
           <p className="font-medium text-orange-900 dark:text-orange-200">
-            Upgrade de conjunto necessário
+            Aqui vai precisar trocar mais de uma peça junto
           </p>
           <p className="mt-1 text-sm text-orange-800 dark:text-orange-300">
             {recommendation.bundle.reason}
           </p>
           <p className="mt-2 text-sm text-orange-800 dark:text-orange-300">
-            Componentes envolvidos:{' '}
+            Peças que entram nessa troca:{' '}
             {recommendation.bundle.components.map(slotLabel).join(', ')}
           </p>
         </Card>
@@ -46,13 +46,13 @@ export function ResultsView({
 
       <section>
         <h2 className="mb-2 font-medium text-slate-900 dark:text-slate-100">
-          Compatibilidade do sistema atual
+          As peças do seu PC combinam entre si?
         </h2>
         {compatibility.results.length === 0 ? (
           <Card>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              Componentes insuficientes para checar compatibilidade entre pares — selecione mais
-              itens na etapa anterior.
+              Faltou peça pra gente checar isso direito — volte no passo anterior e selecione
+              mais itens.
             </p>
           </Card>
         ) : (
@@ -76,7 +76,9 @@ export function ResultsView({
       </section>
 
       <section>
-        <h2 className="mb-2 font-medium text-slate-900 dark:text-slate-100">Análise de gargalo</h2>
+        <h2 className="mb-2 font-medium text-slate-900 dark:text-slate-100">
+          O que está segurando o seu desempenho
+        </h2>
         <Card>
           {bottleneck ? (
             <>
@@ -101,7 +103,7 @@ export function ResultsView({
             </>
           ) : (
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              {bottleneckNote ?? 'Dado insuficiente para determinar gargalo.'}
+              {bottleneckNote ?? 'Não temos dado suficiente pra saber o que está te segurando aqui.'}
             </p>
           )}
         </Card>
@@ -109,12 +111,12 @@ export function ResultsView({
 
       <section>
         <h2 className="mb-2 font-medium text-slate-900 dark:text-slate-100">
-          Recomendações de upgrade
+          O que vale a pena trocar
         </h2>
         {recommendation.recommendations.length === 0 ? (
           <Card>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              Nenhum componente foi identificado como limitante para o perfil escolhido.
+              Boas notícias: pelo perfil escolhido, nenhuma peça sua está te segurando.
             </p>
           </Card>
         ) : (
@@ -144,7 +146,7 @@ export function ResultsView({
                 <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">{rec.cost_benefit}</p>
                 {rec.additional_required_components.length > 0 && (
                   <p className="mt-2 text-xs text-orange-700 dark:text-orange-400">
-                    Também exige: {rec.additional_required_components.map(slotLabel).join(', ')}
+                    Vai precisar trocar junto: {rec.additional_required_components.map(slotLabel).join(', ')}
                   </p>
                 )}
                 {rec.remaining_limitations.length > 0 && (
@@ -167,7 +169,7 @@ export function ResultsView({
         onClick={onReset}
         className="w-full rounded-md border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
       >
-        Nova análise
+        Analisar de novo
       </button>
     </div>
   )

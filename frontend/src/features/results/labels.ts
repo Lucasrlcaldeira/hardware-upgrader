@@ -36,10 +36,10 @@ export const PROFILE_LABELS: Record<UpgradeProfile, string> = {
 }
 
 export const PROFILE_DESCRIPTIONS: Record<UpgradeProfile, string> = {
-  ECONOMICO: 'Menor custo possível, aproveitando ao máximo as peças que você já tem.',
-  CUSTO_BENEFICIO: 'Melhor equilíbrio entre preço e ganho de desempenho.',
-  ALTO_DESEMPENHO: 'Prioriza desempenho, mesmo que exija trocar mais peças.',
-  UPGRADE_COMPLETO: 'Mapeia tudo que vale a pena modernizar na máquina.',
+  ECONOMICO: 'Gasta o mínimo possível, aproveitando ao máximo o que você já tem.',
+  CUSTO_BENEFICIO: 'O melhor equilíbrio entre preço e ganho de desempenho.',
+  ALTO_DESEMPENHO: 'Foco em desempenho, mesmo que precise trocar mais peças.',
+  UPGRADE_COMPLETO: 'Mostra tudo que vale a pena modernizar na sua máquina.',
 }
 
 export const COMPATIBILITY_STATUS_LABELS: Record<CompatibilityStatus, string> = {

@@ -7,8 +7,8 @@ export function LandingPage() {
         Hardware Upgrader
       </h1>
       <p className="text-slate-600 dark:text-slate-400">
-        Diagnóstico técnico do seu PC e recomendações de upgrade com justificativa — não uma
-        lista genérica de peças.
+        A gente dá uma olhada no seu PC e te diz, sem enrolação, o que vale a pena trocar — nada
+        de lista genérica de peças que serve pra qualquer um.
       </p>
       <Link
         to="/analyze"

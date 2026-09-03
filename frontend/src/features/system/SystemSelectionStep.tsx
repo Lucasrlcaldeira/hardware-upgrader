@@ -209,17 +209,17 @@ export function SystemSelectionStep({
     <div className="space-y-4">
       <Card>
         <h2 className="mb-3 font-medium text-slate-900 dark:text-slate-100">
-          Confirme os componentes no catálogo
+          Confirme suas peças
         </h2>
         <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-          O que a detecção já conseguiu confirmar no catálogo aparece pronto abaixo — escolha
-          manualmente só o que sobrou (ou deixe em branco o que não se aplica).
+          O que já conseguimos identificar sozinhos já vem preenchido aí embaixo — você só
+          precisa escolher o que sobrou (ou deixar em branco o que não tiver).
         </p>
 
         {confirmedFields.length > 0 && (
           <div className="mb-4 space-y-2">
             <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">
-              Confirmados automaticamente a partir da detecção
+              A gente já identificou essas sozinho
             </p>
             {confirmedFields.map((f) => (
               <ConfirmedComponentRow
@@ -236,7 +236,7 @@ export function SystemSelectionStep({
           <>
             {confirmedFields.length > 0 && (
               <p className="mb-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-                Escolha os demais componentes
+                Escolha o resto das peças
               </p>
             )}
             <div className="grid gap-3 sm:grid-cols-2">
@@ -257,10 +257,10 @@ export function SystemSelectionStep({
       </Card>
 
       <Card>
-        <h2 className="mb-3 font-medium text-slate-900 dark:text-slate-100">Cenário de uso</h2>
+        <h2 className="mb-3 font-medium text-slate-900 dark:text-slate-100">Como você usa o PC</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block">
-            <span className="text-sm text-slate-500 dark:text-slate-400">Tipo de carga</span>
+            <span className="text-sm text-slate-500 dark:text-slate-400">Pra que mais você usa</span>
             <select
               value={workloadType}
               onChange={(e) => setWorkloadType(e.target.value as WorkloadType)}
@@ -302,7 +302,9 @@ export function SystemSelectionStep({
             </select>
           </label>
           <label className="block">
-            <span className="text-sm text-slate-500 dark:text-slate-400">FPS alvo (opcional)</span>
+            <span className="text-sm text-slate-500 dark:text-slate-400">
+              FPS que você quer alcançar (se souber)
+            </span>
             <input
               type="number"
               min={1}
@@ -316,7 +318,7 @@ export function SystemSelectionStep({
       </Card>
 
       <Card>
-        <h2 className="mb-3 font-medium text-slate-900 dark:text-slate-100">Perfil de upgrade</h2>
+        <h2 className="mb-3 font-medium text-slate-900 dark:text-slate-100">Qual seu estilo de upgrade</h2>
         <div className="grid gap-2 sm:grid-cols-2">
           {PROFILES.map((p) => (
             <label
@@ -349,7 +351,7 @@ export function SystemSelectionStep({
       </button>
       {!hasAnyComponent && (
         <p className="text-center text-xs text-slate-400 dark:text-slate-500">
-          Selecione ao menos um componente para analisar.
+          Escolha pelo menos uma peça antes de analisar.
         </p>
       )}
     </div>

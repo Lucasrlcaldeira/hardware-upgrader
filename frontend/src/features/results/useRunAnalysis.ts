@@ -51,7 +51,7 @@ async function runAnalysis(config: AnalysisConfig): Promise<CombinedAnalysisResu
   let bottleneck: BottleneckAnalysisResult | null = null
   let bottleneckNote: string | null = canCheckBottleneck
     ? null
-    : 'Informe CPU, GPU, resolução e qualidade gráfica para calcular o gargalo.'
+    : 'Pra ver o que está te segurando, a gente precisa saber sua CPU, GPU, resolução e qualidade gráfica.'
 
   if (bottleneckPromise) {
     try {

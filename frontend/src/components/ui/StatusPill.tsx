@@ -7,9 +7,9 @@ const STYLES: Record<DetectionSource, string> = {
 }
 
 const LABELS: Record<DetectionSource, string> = {
-  DETECTED: 'Detectado',
-  MANUAL_REQUIRED: 'Preencher manualmente',
-  MANUAL_PROVIDED: 'Informado por você',
+  DETECTED: 'Achamos sozinho',
+  MANUAL_REQUIRED: 'Preencha você',
+  MANUAL_PROVIDED: 'Você preencheu',
 }
 
 export function StatusPill({ status }: { status: DetectionSource }) {

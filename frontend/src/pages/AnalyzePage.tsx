@@ -9,9 +9,9 @@ import type { HardwareSnapshot } from '../types/detection'
 type Step = 'detect' | 'select' | 'results'
 
 const STEP_LABELS: Record<Step, string> = {
-  detect: 'Etapa 1 de 3 — Detecção de hardware',
-  select: 'Etapa 2 de 3 — Componentes e cenário de uso',
-  results: 'Etapa 3 de 3 — Relatório de diagnóstico',
+  detect: 'Passo 1 de 3 — Vendo o que você tem',
+  select: 'Passo 2 de 3 — Confirmando as peças e como você usa o PC',
+  results: 'Passo 3 de 3 — O resultado',
 }
 
 export function AnalyzePage() {
@@ -44,7 +44,7 @@ export function AnalyzePage() {
           {analysis.isError && (
             <Card className="mt-4 border-red-300 dark:border-red-800">
               <p className="text-sm text-red-700 dark:text-red-400">
-                Não foi possível concluir a análise: {(analysis.error as Error).message}
+                Ih, não deu pra terminar a análise: {(analysis.error as Error).message}
               </p>
             </Card>
           )}

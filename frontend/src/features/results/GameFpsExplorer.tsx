@@ -286,10 +286,11 @@ export function GameFpsExplorer({
 
   return (
     <Card>
-      <h2 className="mb-1 font-medium text-slate-900 dark:text-slate-100">FPS por jogo</h2>
+      <h2 className="mb-1 font-medium text-slate-900 dark:text-slate-100">Quanto de FPS você ganha em cada jogo</h2>
       <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-        Baseado em benchmarks reais publicados — só para os jogos e GPUs com dado cadastrado.
-        Sem dado real para a combinação digitada, avisamos em vez de estimar um número.
+        Usamos benchmarks reais que já existem por aí — só pros jogos e GPUs que a gente tem
+        dado cadastrado. Se não tiver dado real pra combinação que você digitou, a gente avisa
+        em vez de chutar um número.
       </p>
 
       <p className="mb-2 text-xs font-medium text-slate-500 dark:text-slate-400">
@@ -362,9 +363,8 @@ export function GameFpsExplorer({
 
       {noGpuWarning && (
         <p className="mb-4 text-sm text-amber-700 dark:text-amber-400">
-          Não é possível calcular o FPS: nenhuma GPU foi selecionada no catálogo na etapa
-          anterior. Volte e escolha uma GPU (mesmo que seja a mais parecida com a sua) para
-          habilitar essa comparação.
+          Não dá pra calcular o FPS ainda: você não escolheu uma GPU no passo anterior. Volte lá
+          e escolha uma (mesmo que seja só a mais parecida com a sua) pra liberar essa comparação.
         </p>
       )}
 

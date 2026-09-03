@@ -37,14 +37,14 @@ export function DetectionStep({
     data?.field_status.storage_devices === 'MANUAL_REQUIRED' && !manualStorageText.trim()
 
   if (status === 'pending') {
-    return <Card>Detectando hardware da sua máquina…</Card>
+    return <Card>Dando uma olhada nas peças do seu PC…</Card>
   }
 
   if (status === 'error') {
     return (
       <Card>
         <p className="mb-3 text-red-700 dark:text-red-400">
-          Não foi possível detectar o hardware: {(error as Error).message}
+          Não conseguimos ver o hardware do seu PC: {(error as Error).message}
         </p>
         <button
           type="button"
