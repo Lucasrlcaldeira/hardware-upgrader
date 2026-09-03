@@ -1,4 +1,4 @@
-# Hardware Upgrade Advisor
+# Hardware Upgrader
 
 Sistema de diagnóstico de hardware de PC e recomendação de upgrades compatíveis, com
 justificativa técnica para cada recomendação — não uma lista genérica de peças.
@@ -49,15 +49,28 @@ Requer Docker Desktop instalado e rodando:
 docker compose up -d postgres
 ```
 
-> O `docker-compose.yml` também sobe `backend`/`frontend` em containers para fins de
-> build/produção, mas **a detecção de hardware só reflete a máquina real quando o
-> backend roda nativamente** (fora do container) — dentro do Docker ele só enxerga o
-> hardware virtual do container.
+> **a detecção de hardware só reflete a máquina real quando o backend roda nativamente**
+> (fora do container) — o `docker-compose.yml` deste projeto só sobe o Postgres; não há
+> serviço de `backend`/`frontend` em container.
+
+### Dados do catálogo e de benchmarks (seed)
+
+As tabelas de catálogo (CPUs/GPUs/etc.) e de jogos/benchmarks começam vazias após rodar
+as migrações — sem isso, o catálogo aparece sem opções e "FPS por jogo" nunca encontra
+dado. Depois de `alembic upgrade head`, rode (idempotente, pode rodar de novo a qualquer
+momento):
+
+```
+backend\.venv\Scripts\python -m app.modules.catalog.seed.load_seed
+backend\.venv\Scripts\python -m app.modules.games.seed.load_seed
+```
 
 ## Status do projeto
 
 Em desenvolvimento por etapas. Backend: `catalog`, `compatibility`, `performance`,
-`detection`, `recommendation`, `users` (autenticação JWT) e `analysis` (orquestra os
-demais módulos e persiste histórico por usuário) implementados e testados. Frontend:
-fluxo de detecção de hardware integrado; telas de compatibilidade, gargalo,
-recomendação e relatório final ainda não conectadas à API.
+`detection`, `recommendation`, `users` (autenticação JWT), `analysis` (orquestra os
+demais módulos e persiste histórico por usuário) e `games` (FPS por jogo, com benchmarks
+reais cadastrados e aproximação transparente por GPU de desempenho próximo quando a GPU
+exata não tem dado) implementados e testados. Frontend: fluxo completo conectado à API,
+da detecção de hardware ao relatório final (compatibilidade, gargalo, recomendações e
+comparação de FPS).

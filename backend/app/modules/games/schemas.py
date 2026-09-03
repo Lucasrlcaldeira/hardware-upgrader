@@ -20,3 +20,4 @@ class GameFpsResult(BaseModel):
     source_url: str
     quality_preset_note: str
     cpu_bottleneck_caveat: str | None = None
+    approximation_note: str | None = None

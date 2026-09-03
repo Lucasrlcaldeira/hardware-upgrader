@@ -1,5 +1,5 @@
 [project]
-name = "hardware-upgrade-advisor-backend"
+name = "hardware-upgrader-backend"
 version = "0.1.0"
 description = "Backend do sistema de diagnóstico e recomendação de upgrades de hardware."
 requires-python = ">=3.11"

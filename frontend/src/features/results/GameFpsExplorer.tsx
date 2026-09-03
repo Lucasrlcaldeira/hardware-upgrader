@@ -99,6 +99,11 @@ function FpsColumn({
           <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
             {mutation.data.quality_preset_note}
           </p>
+          {mutation.data.approximation_note && (
+            <p className="mt-2 text-xs text-sky-700 dark:text-sky-400">
+              {mutation.data.approximation_note}
+            </p>
+          )}
           {mutation.data.cpu_bottleneck_caveat && (
             <p className="mt-2 text-xs text-amber-700 dark:text-amber-400">
               {mutation.data.cpu_bottleneck_caveat}

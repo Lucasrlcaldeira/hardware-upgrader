@@ -17,4 +17,5 @@ export interface GameFpsResult {
   source_url: string
   quality_preset_note: string
   cpu_bottleneck_caveat: string | null
+  approximation_note: string | null
 }

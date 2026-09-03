@@ -123,3 +123,54 @@ def test_fps_estimate_422_when_no_benchmark_for_this_gpu(client, db_session):
 
     assert response.status_code == 422
     assert response.json()["error"] == "InsufficientDataError"
+
+
+def test_fps_estimate_falls_back_to_closest_benchmarked_gpu(client, db_session):
+    _seed_gpus(client)
+    _seed_game_with_benchmark(db_session)
+    client.post(
+        "/catalog/import",
+        json={
+            "catalog_type": "gpu",
+            "items": [
+                {"manufacturer": "AMD", "model_name": "GPU Sem Benchmark", "performance_tier": 85}
+            ],
+        },
+    )
+
+    response = client.post(
+        "/games/fps-estimate",
+        json={"game_title": "Jogo Teste", "gpu_model_name": "GPU Sem Benchmark", "resolution": "1080P"},
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["avg_fps"] == 90
+    assert body["source_url"] == "https://example.com/benchmark"
+    assert "GPU Forte" in body["approximation_note"]
+
+
+def test_fps_estimate_422_when_closest_benchmarked_gpu_is_too_far_in_tier(client, db_session):
+    _seed_gpus(client)
+    _seed_game_with_benchmark(db_session)
+    client.post(
+        "/catalog/import",
+        json={
+            "catalog_type": "gpu",
+            "items": [
+                {"manufacturer": "AMD", "model_name": "GPU Muito Diferente", "performance_tier": 55}
+            ],
+        },
+    )
+
+    response = client.post(
+        "/games/fps-estimate",
+        json={
+            "game_title": "Jogo Teste",
+            "gpu_model_name": "GPU Muito Diferente",
+            "resolution": "1080P",
+        },
+    )
+
+    assert response.status_code == 422
+    assert response.json()["error"] == "InsufficientDataError"

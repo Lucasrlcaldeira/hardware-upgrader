@@ -8,7 +8,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    app_name: str = "Hardware Upgrade Advisor"
+    app_name: str = "Hardware Upgrader"
     environment: str = "development"
 
     database_url: str = "postgresql+psycopg://hwa:hwa@localhost:5432/hardware_advisor"
