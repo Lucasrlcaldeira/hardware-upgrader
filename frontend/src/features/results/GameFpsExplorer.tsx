@@ -53,34 +53,104 @@ function UpgradeToggle({
   )
 }
 
+interface ManualFpsFallback {
+  value: string
+  onChange: (value: string) => void
+  submitted: number | null
+  onSubmit: () => void
+  onEdit: () => void
+}
+
 function FpsColumn({
   title,
   gpuModelName,
   mutation,
+  manualFallback,
 }: {
   title: string
   gpuModelName: string | null | undefined
   mutation: UseMutationResult<GameFpsResult, ApiError, void>
+  manualFallback?: ManualFpsFallback
 }) {
-  return (
-    <div>
-      <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{title}</p>
-      <p className="mb-2 truncate text-sm text-slate-600 dark:text-slate-300">
-        {gpuModelName ?? 'GPU não informada'}
-      </p>
-
-      {!gpuModelName && (
+  function renderBody() {
+    if (!gpuModelName) {
+      return (
         <p className="text-sm text-slate-400 dark:text-slate-500">
           Sem GPU informada para calcular.
         </p>
-      )}
-      {gpuModelName && mutation.isPending && (
-        <p className="text-sm text-slate-500 dark:text-slate-400">Buscando…</p>
-      )}
-      {gpuModelName && mutation.isError && (
-        <p className="text-sm text-amber-700 dark:text-amber-400">{mutation.error.message}</p>
-      )}
-      {gpuModelName && mutation.isSuccess && (
+      )
+    }
+    if (mutation.isPending) {
+      return <p className="text-sm text-slate-500 dark:text-slate-400">Buscando…</p>
+    }
+
+    // Número digitado pelo próprio usuário tem prioridade sobre qualquer resultado da API —
+    // é a fonte mais confiável que temos pra "PC atual" quando não há benchmark exato.
+    if (manualFallback && manualFallback.submitted !== null) {
+      return (
+        <div>
+          <p className="text-3xl font-semibold text-slate-900 dark:text-slate-100">
+            {manualFallback.submitted} <span className="text-base font-normal">FPS</span>
+          </p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Informado por você, não um benchmark de terceiros.{' '}
+            <button
+              type="button"
+              onClick={manualFallback.onEdit}
+              className="underline hover:text-slate-700 dark:hover:text-slate-200"
+            >
+              editar
+            </button>
+          </p>
+        </div>
+      )
+    }
+
+    const needsManualInput =
+      Boolean(manualFallback) &&
+      (mutation.isError || (mutation.isSuccess && Boolean(mutation.data.approximation_note)))
+
+    if (needsManualInput && manualFallback) {
+      const reason = mutation.isError
+        ? mutation.error.message
+        : mutation.isSuccess
+          ? mutation.data.approximation_note
+          : null
+      return (
+        <div>
+          <p className="text-sm text-slate-600 dark:text-slate-300">{reason}</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            Abra o jogo agora, jogue um pouco nessa resolução e digite o FPS médio que você está
+            vendo — é mais confiável do que um número medido em outra GPU ou CPU.
+          </p>
+          <div className="mt-2 flex items-center gap-2">
+            <input
+              type="number"
+              min={1}
+              value={manualFallback.value}
+              onChange={(e) => manualFallback.onChange(e.target.value)}
+              placeholder="Ex: 45"
+              className="w-24 rounded-md border border-slate-300 px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-800"
+            />
+            <button
+              type="button"
+              onClick={manualFallback.onSubmit}
+              disabled={!manualFallback.value.trim()}
+              className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      )
+    }
+
+    if (mutation.isError) {
+      return <p className="text-sm text-amber-700 dark:text-amber-400">{mutation.error.message}</p>
+    }
+
+    if (mutation.isSuccess) {
+      return (
         <div>
           <p
             className={`text-3xl font-semibold ${
@@ -122,7 +192,19 @@ function FpsColumn({
             </p>
           )}
         </div>
-      )}
+      )
+    }
+
+    return null
+  }
+
+  return (
+    <div>
+      <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{title}</p>
+      <p className="mb-2 truncate text-sm text-slate-600 dark:text-slate-300">
+        {gpuModelName ?? 'GPU não informada'}
+      </p>
+      {renderBody()}
     </div>
   )
 }
@@ -147,6 +229,8 @@ export function GameFpsExplorer({
   const [gameTitle, setGameTitle] = useState('')
   const [resolution, setResolution] = useState<Resolution>('1080P')
   const [noGpuWarning, setNoGpuWarning] = useState(false)
+  const [manualCurrentFps, setManualCurrentFps] = useState('')
+  const [manualCurrentFpsSubmitted, setManualCurrentFpsSubmitted] = useState<number | null>(null)
 
   const gamesQuery = useQuery({ queryKey: ['games-list'], queryFn: fetchGameTitles })
 
@@ -194,6 +278,8 @@ export function GameFpsExplorer({
       return
     }
     setNoGpuWarning(false)
+    setManualCurrentFps('')
+    setManualCurrentFpsSubmitted(null)
     currentMutation.mutate()
     if (futureGpu) futureMutation.mutate()
   }
@@ -289,7 +375,18 @@ export function GameFpsExplorer({
         futureMutation.isPending ||
         futureMutation.isError) && (
         <div className="grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-2 dark:border-slate-700">
-          <FpsColumn title="PC atual" gpuModelName={currentGpu} mutation={currentMutation} />
+          <FpsColumn
+            title="PC atual"
+            gpuModelName={currentGpu}
+            mutation={currentMutation}
+            manualFallback={{
+              value: manualCurrentFps,
+              onChange: setManualCurrentFps,
+              submitted: manualCurrentFpsSubmitted,
+              onSubmit: () => setManualCurrentFpsSubmitted(Number(manualCurrentFps)),
+              onEdit: () => setManualCurrentFpsSubmitted(null),
+            }}
+          />
           <FpsColumn title="PC futuro" gpuModelName={futureGpu} mutation={futureMutation} />
         </div>
       )}
