@@ -82,10 +82,25 @@ function FpsColumn({
       )}
       {gpuModelName && mutation.isSuccess && (
         <div>
-          <p className="text-3xl font-semibold text-slate-900 dark:text-slate-100">
+          <p
+            className={`text-3xl font-semibold ${
+              mutation.data.cpu_bottleneck_caveat
+                ? 'text-amber-700 dark:text-amber-400'
+                : 'text-slate-900 dark:text-slate-100'
+            }`}
+          >
+            {mutation.data.cpu_bottleneck_caveat && (
+              <span className="text-lg font-normal">até </span>
+            )}
             {mutation.data.avg_fps} <span className="text-base font-normal">FPS</span>
           </p>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+          {mutation.data.cpu_bottleneck_caveat && (
+            <p className="mt-1 text-xs font-medium text-amber-700 dark:text-amber-400">
+              {mutation.data.cpu_bottleneck_caveat} O número acima é o teto da GPU, não uma
+              previsão para o seu processador atual.
+            </p>
+          )}
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             Medido com {mutation.data.test_cpu_model} — fonte:{' '}
             <a
               href={mutation.data.source_url}
@@ -102,11 +117,6 @@ function FpsColumn({
           {mutation.data.approximation_note && (
             <p className="mt-2 text-xs text-sky-700 dark:text-sky-400">
               {mutation.data.approximation_note}
-            </p>
-          )}
-          {mutation.data.cpu_bottleneck_caveat && (
-            <p className="mt-2 text-xs text-amber-700 dark:text-amber-400">
-              {mutation.data.cpu_bottleneck_caveat}
             </p>
           )}
         </div>
