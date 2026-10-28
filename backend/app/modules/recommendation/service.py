@@ -34,7 +34,9 @@ _PROFILE_SUMMARY_LABELS = {
 _BOTTLENECK_SUMMARY_LABELS = {
     BottleneckVerdict.CPU_BOUND: "o processador é o que mais está segurando seu desempenho hoje",
     BottleneckVerdict.GPU_BOUND: "a placa de vídeo é o que mais está segurando seu desempenho hoje",
-    BottleneckVerdict.BALANCED: "processador e placa de vídeo estão equilibrados entre si, sem um vilão claro",
+    BottleneckVerdict.BALANCED: (
+        "processador e placa de vídeo estão equilibrados entre si, sem um vilão claro"
+    ),
 }
 
 _SLOT_SUMMARY_LABELS = {
@@ -264,7 +266,15 @@ def _recommend_cpu(
 
 
 def _recommend_gpu(
-    db: Session, gpu, psu, case, motherboard, profile: UpgradeProfile, *, is_target: bool
+    db: Session,
+    gpu,
+    psu,
+    case,
+    motherboard,
+    profile: UpgradeProfile,
+    *,
+    is_target: bool,
+    bottleneck,
 ):
     candidate = _pick_gpu_candidate(db, gpu, profile)
     if candidate is None:
@@ -281,15 +291,16 @@ def _recommend_gpu(
     additional = sorted({c for r in results for c in r.additional_required_components})
     limitations = [r.reason for r in results if r.status != CompatibilityStatus.COMPATIVEL]
 
-    problem = (
-        "Sua GPU tem folga de desempenho relativo em relação à CPU/cenário informado, o que "
-        "pode limitar a taxa de quadros antes da GPU atingir seu potencial."
-        if is_target
-        else (
+    # Mesmo padrão de _recommend_cpu: quando a GPU é o gargalo, a explicação do próprio
+    # motor de gargalo é o "problema". (O texto fixo antigo dizia que a GPU "tinha folga" em
+    # relação à CPU — o contrário do que significa a GPU ser o fator limitante.)
+    if is_target and bottleneck is not None:
+        problem = bottleneck.explanation
+    else:
+        problem = (
             "GPU atual possui desempenho relativo bem abaixo de opções disponíveis no "
             "catálogo para o perfil de upgrade escolhido."
         )
-    )
 
     tier_gain = (
         candidate.performance_tier - gpu.performance_tier
@@ -498,7 +509,14 @@ def generate_recommendations(db: Session, request: RecommendationRequest) -> Rec
 
     if gpu is not None and (flagged_gpu or aggressive):
         rec, results = _recommend_gpu(
-            db, gpu, psu, case, motherboard, request.profile, is_target=flagged_gpu
+            db,
+            gpu,
+            psu,
+            case,
+            motherboard,
+            request.profile,
+            is_target=flagged_gpu,
+            bottleneck=bottleneck,
         )
         if rec is not None:
             recommendations.append(rec)

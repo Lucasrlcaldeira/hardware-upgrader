@@ -52,7 +52,7 @@ export function AnalyzePage() {
       )}
 
       {step === 'results' && analysis.data && (
-        <ResultsView result={analysis.data} onReset={handleReset} />
+        <ResultsView result={analysis.data} detected={confirmedSnapshot} onReset={handleReset} />
       )}
     </div>
   )

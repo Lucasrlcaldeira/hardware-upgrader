@@ -33,6 +33,7 @@ def run_detection(collector: HardwareCollector) -> DetectionResult:
         ram_speed_mhz=ram.speed_mhz,
         ram_modules=ram.modules,
         storage_devices=collector.detect_storage(),
+        free_disk_space_gb=collector.detect_free_disk_space_gb(),
         psu_model_name=psu.model_name,
         psu_wattage=psu.wattage,
         os_name=os_info.name,

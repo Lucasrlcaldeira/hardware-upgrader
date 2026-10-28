@@ -36,18 +36,30 @@ const IGNORABLE_TOKENS = new Set([
   'com',
 ])
 
+// Ruído removido ANTES de quebrar em tokens: depois disso "(TM)" vira um token "tm" solto,
+// "@ 3.20GHz" vira "3" + "20ghz" e "6-Core" vira um "6" — e qualquer token que sobra impede o
+// casamento exato. Era por isso que CPUs Intel ("Intel(R) Core(TM) i5-12400 CPU @ 2.50GHz")
+// e Ryzens recentes ("AMD Ryzen 5 5600 6-Core Processor") nunca casavam com o catálogo.
+const PRE_STRIP_PATTERNS = [
+  /\((?:r|tm|c)\)/g,
+  /[®™]/g,
+  /@?\s*\d+(?:[.,]\d+)?\s*ghz\b/g,
+  /\b\d+-core\b/g,
+]
+
 function tokenize(value: string): string[] {
-  return value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
+  let normalized = value.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '')
+  for (const pattern of PRE_STRIP_PATTERNS) {
+    normalized = normalized.replace(pattern, ' ')
+  }
+  return normalized
     .replace(/[^a-z0-9]+/g, ' ')
     .split(' ')
     .filter(Boolean)
 }
 
-function isClockSpeedToken(token: string): boolean {
-  return /^\d+(\.\d+)?g?hz$/.test(token)
+function significantTokens(value: string): Set<string> {
+  return new Set(tokenize(value).filter((t) => !IGNORABLE_TOKENS.has(t)))
 }
 
 /**
@@ -64,17 +76,17 @@ export function findCatalogAutoMatch(
 ): CatalogOption | null {
   if (!detected || !options?.length) return null
 
-  const detectedTokens = new Set(
-    tokenize(detected).filter((t) => !IGNORABLE_TOKENS.has(t) && !isClockSpeedToken(t)),
-  )
+  const detectedTokens = significantTokens(detected)
   if (detectedTokens.size === 0) return null
 
+  // Os dois lados passam pelo mesmo filtro: se só a string detectada perdesse os tokens
+  // genéricos, um item como "Core i5-12400" (com "core", que é genérico) nunca casaria.
   const matches = options.filter((option) => {
-    const optionTokens = tokenize(option.model_name)
-    if (optionTokens.length === 0) return false
+    const optionTokens = significantTokens(option.model_name)
+    if (optionTokens.size === 0) return false
     return (
-      optionTokens.length === detectedTokens.size &&
-      optionTokens.every((t) => detectedTokens.has(t))
+      optionTokens.size === detectedTokens.size &&
+      [...optionTokens].every((t) => detectedTokens.has(t))
     )
   })
 

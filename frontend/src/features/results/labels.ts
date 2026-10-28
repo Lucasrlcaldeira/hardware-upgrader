@@ -1,4 +1,5 @@
 import type { CompatibilityRelation, CompatibilityStatus } from '../../types/compatibility'
+import type { CheckStatus, GameVerdict, RequirementComponent } from '../../types/games'
 import type {
   BottleneckVerdict,
   ConfidenceLevel,
@@ -112,4 +113,43 @@ export const SLOT_LABELS: Record<ComponentSlot, string> = {
 
 export function slotLabel(slot: string): string {
   return SLOT_LABELS[slot as ComponentSlot] ?? slot
+}
+
+export const GAME_VERDICT_LABELS: Record<GameVerdict, string> = {
+  RODA_NO_RECOMENDADO: 'Roda no recomendado',
+  RODA_NO_MINIMO: 'Roda no mínimo',
+  ABAIXO_DO_MINIMO: 'Abaixo do mínimo',
+  INDETERMINADO: 'Não deu pra cravar',
+}
+
+export const GAME_VERDICT_STYLES: Record<GameVerdict, string> = {
+  RODA_NO_RECOMENDADO:
+    'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-200',
+  RODA_NO_MINIMO:
+    'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200',
+  ABAIXO_DO_MINIMO:
+    'border-red-300 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950/30 dark:text-red-200',
+  INDETERMINADO:
+    'border-slate-300 bg-slate-50 text-slate-900 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-200',
+}
+
+export const CHECK_STATUS_LABELS: Record<CheckStatus, string> = {
+  ATENDE: 'Atende',
+  NAO_ATENDE: 'Não atende',
+  NAO_DETERMINADO: 'Não deu pra comparar',
+}
+
+export const CHECK_STATUS_STYLES: Record<CheckStatus, string> = {
+  ATENDE: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+  NAO_ATENDE: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
+  NAO_DETERMINADO: 'bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300',
+}
+
+export const REQUIREMENT_COMPONENT_LABELS: Record<RequirementComponent, string> = {
+  cpu: 'Processador',
+  gpu: 'Placa de vídeo',
+  vram: 'Memória da placa de vídeo',
+  ram: 'Memória RAM',
+  storage: 'Armazenamento',
+  os: 'Sistema operacional',
 }

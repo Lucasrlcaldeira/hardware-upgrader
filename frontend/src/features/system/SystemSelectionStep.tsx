@@ -1,8 +1,6 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import {
-  fetchCases,
-  fetchCoolers,
   fetchCpus,
   fetchGpus,
   fetchMotherboards,
@@ -45,6 +43,17 @@ const PROFILES: UpgradeProfile[] = [
 const RESOLUTIONS: Resolution[] = ['1080P', '1440P', '4K']
 const QUALITIES: GraphicsQuality[] = ['LOW', 'MEDIUM', 'HIGH', 'ULTRA']
 const WORKLOADS: WorkloadType[] = ['GAMING', 'CONTENT_CREATION', 'PRODUCTIVITY', 'GENERAL']
+
+/**
+ * Ponto de partida para "Resolução": a do monitor detectado, em vez de sempre 1080p. Usa a
+ * altura porque é ela que define a categoria — um ultrawide 2560x1080 continua sendo 1080p.
+ */
+function resolutionFromMonitor(monitorResolution: string | null): Resolution {
+  const height = Number(monitorResolution?.split('x')[1])
+  if (height >= 2160) return '4K'
+  if (height >= 1440) return '1440P'
+  return '1080P'
+}
 
 function ramHint(detected: HardwareSnapshot): string | null {
   if (!detected.ram_capacity_gb) return null
@@ -97,7 +106,9 @@ export function SystemSelectionStep({
   const [system, setSystem] = useState<SystemSnapshot>({})
   const [autoMatched, setAutoMatched] = useState<Partial<Record<keyof SystemSnapshot, boolean>>>({})
   const [profile, setProfile] = useState<UpgradeProfile>('CUSTO_BENEFICIO')
-  const [resolution, setResolution] = useState<Resolution>('1080P')
+  const [resolution, setResolution] = useState<Resolution>(() =>
+    resolutionFromMonitor(detected.monitor_resolution),
+  )
   const [graphicsQuality, setGraphicsQuality] = useState<GraphicsQuality>('HIGH')
   const [targetFps, setTargetFps] = useState('')
   const [workloadType, setWorkloadType] = useState<WorkloadType>('GAMING')
@@ -108,12 +119,13 @@ export function SystemSelectionStep({
   const ramQuery = useQuery({ queryKey: ['catalog-ram'], queryFn: fetchRamKits })
   const storageQuery = useQuery({ queryKey: ['catalog-storage'], queryFn: fetchStorage })
   const psuQuery = useQuery({ queryKey: ['catalog-psus'], queryFn: fetchPsus })
-  const caseQuery = useQuery({ queryKey: ['catalog-cases'], queryFn: fetchCases })
-  const coolerQuery = useQuery({ queryKey: ['catalog-coolers'], queryFn: fetchCoolers })
+  // Gabinete e cooler ficaram de fora desta etapa de propósito: o catálogo tem pouquíssimas
+  // opções deles, e só alimentavam checagens secundárias de compatibilidade (nem as
+  // recomendações nem a comparação com a Steam usam). O backend continua aceitando os dois.
 
-  // RAM/gabinete/cooler nunca chegam da detecção como um "modelo" comparável ao catálogo
-  // (RAM vem como capacidade/frequência crua; gabinete e cooler não são detectados) — só
-  // tentamos auto-match nos campos onde a detecção de fato devolve uma string de modelo.
+  // RAM nunca chega da detecção como um "modelo" comparável ao catálogo (vem como
+  // capacidade/frequência crua) — só tentamos auto-match nos campos onde a detecção de fato
+  // devolve uma string de modelo.
   useAutoMatch('cpu_model_name', detected.cpu_model_name, cpuQuery.data, setSystem, setAutoMatched)
   useAutoMatch('gpu_model_name', detected.gpu_model_name, gpuQuery.data, setSystem, setAutoMatched)
   useAutoMatch(
@@ -184,8 +196,6 @@ export function SystemSelectionStep({
       hint: detected.psu_model_name ?? (detected.psu_wattage ? `${detected.psu_wattage}W` : null),
       autoMatchable: true,
     },
-    { key: 'case_model_name', label: 'Gabinete', query: caseQuery, hint: null, autoMatchable: false },
-    { key: 'cooler_model_name', label: 'Cooler', query: coolerQuery, hint: null, autoMatchable: false },
   ]
 
   const isConfirmed = (f: FieldConfig) => f.autoMatchable && autoMatched[f.key] && system[f.key]

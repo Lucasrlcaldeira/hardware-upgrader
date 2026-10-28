@@ -20,6 +20,7 @@ const baseSnapshot: DetectionResult['snapshot'] = {
   ram_speed_mhz: 2400,
   ram_modules: 2,
   storage_devices: [],
+  free_disk_space_gb: 120,
   psu_model_name: null,
   psu_wattage: null,
   os_name: 'Windows',
@@ -38,6 +39,7 @@ const baseResult: DetectionResult = {
     ram_speed_mhz: 'DETECTED',
     ram_modules: 'DETECTED',
     storage_devices: 'MANUAL_REQUIRED',
+    free_disk_space_gb: 'DETECTED',
     psu_model_name: 'MANUAL_REQUIRED',
     psu_wattage: 'MANUAL_REQUIRED',
     os_name: 'DETECTED',
@@ -73,5 +75,8 @@ describe('DetectionStep', () => {
     const merged = onContinue.mock.calls[0][0]
     expect(merged.gpu_model_name).toBe('valor de teste')
     expect(merged.storage_devices[0].model_name).toBe('SSD 480GB')
+    // Espaço livre não é campo manual, mas precisa seguir adiante para a checagem da Steam.
+    expect(merged.free_disk_space_gb).toBe(120)
+    expect(screen.getByText('Maior espaço livre numa unidade: 120 GB')).toBeInTheDocument()
   })
 })
