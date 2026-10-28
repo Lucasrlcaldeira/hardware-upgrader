@@ -4,6 +4,7 @@ import { findCatalogAutoMatch } from './autoMatch'
 const cpus = [
   { model_name: 'Ryzen 5 1600', manufacturer: 'AMD' },
   { model_name: 'Ryzen 5 5600', manufacturer: 'AMD' },
+  { model_name: 'Core i5-12400', manufacturer: 'Intel' },
 ]
 
 const gpus = [
@@ -17,6 +18,16 @@ describe('findCatalogAutoMatch', () => {
   it('matches a CPU string with vendor/core-count noise stripped around the real model', () => {
     const match = findCatalogAutoMatch('AMD Ryzen 5 1600 Six-Core Processor', cpus)
     expect(match?.model_name).toBe('Ryzen 5 1600')
+  })
+
+  it('matches the way Windows reports Intel CPUs, with (R)/(TM) and clock speed', () => {
+    const match = findCatalogAutoMatch('Intel(R) Core(TM) i5-12400 CPU @ 2.50GHz', cpus)
+    expect(match?.model_name).toBe('Core i5-12400')
+  })
+
+  it('matches recent Ryzen names that spell the core count as "6-Core"', () => {
+    const match = findCatalogAutoMatch('AMD Ryzen 5 5600 6-Core Processor', cpus)
+    expect(match?.model_name).toBe('Ryzen 5 5600')
   })
 
   it('does NOT match a GPU variant (XT) to the base model — different products', () => {

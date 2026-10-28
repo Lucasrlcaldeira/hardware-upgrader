@@ -14,6 +14,8 @@ export interface HardwareSnapshot {
   ram_speed_mhz: number | null
   ram_modules: number | null
   storage_devices: StorageDeviceInfo[]
+  /** Maior espaço livre entre as unidades locais — onde caberia instalar um jogo. */
+  free_disk_space_gb: number | null
   psu_model_name: string | null
   psu_wattage: number | null
   os_name: string | null

@@ -1,10 +1,16 @@
 import { apiGet, apiPost } from './client'
-import type { GameFpsRequest, GameFpsResult } from '../types/games'
+import type {
+  GameRequirementsCheckRequest,
+  GameRequirementsCheckResult,
+  SteamGameSummary,
+} from '../types/games'
 
-export function fetchGameTitles(): Promise<string[]> {
-  return apiGet<string[]>('/games/')
+export function searchSteamGames(term: string): Promise<SteamGameSummary[]> {
+  return apiGet<SteamGameSummary[]>(`/games/search?q=${encodeURIComponent(term)}`)
 }
 
-export function fetchFpsEstimate(payload: GameFpsRequest): Promise<GameFpsResult> {
-  return apiPost<GameFpsResult>('/games/fps-estimate', payload)
+export function checkGameRequirements(
+  payload: GameRequirementsCheckRequest,
+): Promise<GameRequirementsCheckResult> {
+  return apiPost<GameRequirementsCheckResult>('/games/requirements-check', payload)
 }

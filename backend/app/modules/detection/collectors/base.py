@@ -28,6 +28,9 @@ class HardwareCollector(ABC):
     def detect_storage(self) -> list[StorageDeviceInfo]: ...
 
     @abstractmethod
+    def detect_free_disk_space_gb(self) -> int | None: ...
+
+    @abstractmethod
     def detect_psu(self) -> PsuInfo: ...
 
     @abstractmethod

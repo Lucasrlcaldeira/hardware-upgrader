@@ -42,6 +42,8 @@ class HardwareSnapshotBase(BaseModel):
     ram_speed_mhz: int | None = None
     ram_modules: int | None = None
     storage_devices: list[StorageDeviceInfo] = []
+    # Maior espaço livre entre as unidades locais — é onde caberia instalar um jogo.
+    free_disk_space_gb: int | None = None
     psu_model_name: str | None = None
     psu_wattage: int | None = None
     os_name: str | None = None

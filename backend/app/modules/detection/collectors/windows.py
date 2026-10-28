@@ -1,13 +1,17 @@
 import logging
 import platform
 
+import psutil
 import pythoncom
 import wmi
 
 from app.modules.detection.collectors.base import HardwareCollector
+from app.modules.detection.collectors.heuristics import pick_primary_gpu, storage_type_from_msft
 from app.modules.detection.schemas import MonitorInfo, OsInfo, PsuInfo, RamInfo, StorageDeviceInfo
 
 logger = logging.getLogger(__name__)
+
+_ENUM_CURRENT_SETTINGS = -1
 
 
 class WindowsWmiCollector(HardwareCollector):
@@ -18,7 +22,7 @@ class WindowsWmiCollector(HardwareCollector):
     o que é o comportamento correto (não inventamos o dado).
     """
 
-    def _connect(self) -> "wmi.WMI":
+    def _connect(self, namespace: str | None = None) -> "wmi.WMI":
         # COM tem estado por thread, e o FastAPI despacha dependências/handlers síncronos
         # para um pool de threads sem garantir a mesma thread entre chamadas dentro de uma
         # mesma requisição — conectar uma única vez em __init__ falhava intermitentemente
@@ -26,7 +30,7 @@ class WindowsWmiCollector(HardwareCollector):
         # CoInitialize é idempotente por thread (seguro chamar de novo), então conectamos
         # aqui, a cada chamada, em vez de guardar uma conexão criada em outra thread.
         pythoncom.CoInitialize()
-        return wmi.WMI()
+        return wmi.WMI(namespace=namespace) if namespace else wmi.WMI()
 
     def detect_cpu(self) -> str | None:
         try:
@@ -39,7 +43,7 @@ class WindowsWmiCollector(HardwareCollector):
     def detect_gpu(self) -> str | None:
         try:
             gpus = self._connect().Win32_VideoController()
-            return gpus[0].Name.strip() if gpus and gpus[0].Name else None
+            return pick_primary_gpu([gpu.Name for gpu in gpus])
         except Exception:
             logger.exception("Falha ao detectar GPU via WMI")
             return None
@@ -70,24 +74,50 @@ class WindowsWmiCollector(HardwareCollector):
             return RamInfo()
 
     def detect_storage(self) -> list[StorageDeviceInfo]:
+        # MSFT_PhysicalDisk (Windows 8+) informa se o disco é SSD/HDD/NVMe, o que
+        # Win32_DiskDrive não faz. Se o namespace não estiver disponível, caímos no
+        # Win32_DiskDrive e deixamos o tipo em branco.
+        try:
+            disks = self._connect("root/Microsoft/Windows/Storage").MSFT_PhysicalDisk()
+            return [
+                StorageDeviceInfo(
+                    storage_type=storage_type_from_msft(disk.MediaType, disk.BusType),
+                    capacity_gb=round(int(disk.Size) / (1024**3)) if disk.Size else None,
+                    model_name=disk.FriendlyName.strip() if disk.FriendlyName else None,
+                )
+                for disk in disks
+            ]
+        except Exception:
+            logger.warning(
+                "MSFT_PhysicalDisk indisponível; usando Win32_DiskDrive (sem tipo de disco)",
+                exc_info=True,
+            )
+
         try:
             drives = self._connect().Win32_DiskDrive()
-            devices = []
-            for drive in drives:
-                capacity_gb = round(int(drive.Size) / (1024**3)) if drive.Size else None
-                devices.append(
-                    StorageDeviceInfo(
-                        # WMI não distingue HDD/SATA SSD/NVMe de forma confiável;
-                        # deixar em branco em vez de chutar.
-                        storage_type=None,
-                        capacity_gb=capacity_gb,
-                        model_name=drive.Model.strip() if drive.Model else None,
-                    )
+            return [
+                StorageDeviceInfo(
+                    storage_type=None,
+                    capacity_gb=round(int(drive.Size) / (1024**3)) if drive.Size else None,
+                    model_name=drive.Model.strip() if drive.Model else None,
                 )
-            return devices
+                for drive in drives
+            ]
         except Exception:
             logger.exception("Falha ao detectar armazenamento via WMI")
             return []
+
+    def detect_free_disk_space_gb(self) -> int | None:
+        free_values: list[int] = []
+        for partition in psutil.disk_partitions(all=False):
+            # Só unidades internas: pendrives e leitores de DVD não são onde se instala jogo.
+            if "fixed" not in partition.opts:
+                continue
+            try:
+                free_values.append(psutil.disk_usage(partition.mountpoint).free)
+            except OSError:
+                logger.warning("Sem acesso à unidade %s", partition.mountpoint, exc_info=True)
+        return int(max(free_values) / (1024**3)) if free_values else None
 
     def detect_psu(self) -> PsuInfo:
         return PsuInfo()
@@ -106,16 +136,23 @@ class WindowsWmiCollector(HardwareCollector):
         try:
             import win32api
 
-            width = win32api.GetSystemMetrics(0)
-            height = win32api.GetSystemMetrics(1)
-            resolution = f"{width}x{height}" if width and height else None
-
+            # EnumDisplaySettings devolve o modo de vídeo real. GetSystemMetrics (o que
+            # usávamos antes) é afetado pela escala do Windows: com 125%, um monitor 1920x1080
+            # aparecia como 1536x864, porque o processo do backend não é "DPI aware".
+            resolution = None
             refresh_hz = None
             try:
-                settings = win32api.EnumDisplaySettings(None, -1)
+                settings = win32api.EnumDisplaySettings(None, _ENUM_CURRENT_SETTINGS)
+                if settings.PelsWidth and settings.PelsHeight:
+                    resolution = f"{settings.PelsWidth}x{settings.PelsHeight}"
                 refresh_hz = getattr(settings, "DisplayFrequency", None) or None
             except Exception:
-                logger.exception("Falha ao detectar taxa de atualização do monitor")
+                logger.exception("Falha ao ler o modo de vídeo atual do monitor")
+
+            if resolution is None:
+                width = win32api.GetSystemMetrics(0)
+                height = win32api.GetSystemMetrics(1)
+                resolution = f"{width}x{height}" if width and height else None
 
             return MonitorInfo(resolution=resolution, refresh_hz=refresh_hz)
         except Exception:

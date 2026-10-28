@@ -1,6 +1,7 @@
 import { Badge } from '../../components/ui/Badge'
 import { Card } from '../../components/ui/Card'
-import { GameFpsExplorer } from './GameFpsExplorer'
+import type { HardwareSnapshot } from '../../types/detection'
+import { GameRequirementsChecker } from './GameRequirementsChecker'
 import type { CombinedAnalysisResult } from './useRunAnalysis'
 import {
   BOTTLENECK_VERDICT_LABELS,
@@ -16,9 +17,11 @@ import {
 
 export function ResultsView({
   result,
+  detected,
   onReset,
 }: {
   result: CombinedAnalysisResult
+  detected: HardwareSnapshot | null
   onReset: () => void
 }) {
   const { system, compatibility, bottleneck, bottleneckNote, recommendation } = result
@@ -162,7 +165,11 @@ export function ResultsView({
         )}
       </section>
 
-      <GameFpsExplorer system={system} recommendations={recommendation.recommendations} />
+      <GameRequirementsChecker
+        system={system}
+        detected={detected}
+        recommendations={recommendation.recommendations}
+      />
 
       <button
         type="button"

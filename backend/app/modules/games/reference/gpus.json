@@ -1,0 +1,577 @@
+{
+  "_sobre": "Escala ordinal aproximada de desempenho para GPUs citadas em requisitos da Steam e que NÃO estão no catálogo de upgrades (placas antigas, gráficos integrados e algumas variantes). Mesma escala do performance_tier do catálogo: cada placa foi posicionada entre os vizinhos do catálogo com base em agregados públicos de desempenho relativo. As GPUs do catálogo continuam sendo a fonte de verdade para os modelos que existem lá. Serve para comparar 'pelo menos tão boa quanto', nunca para estimar FPS.",
+  "items": [
+    {
+      "name": "GeForce 8800 GT",
+      "score": 1
+    },
+    {
+      "name": "GeForce 9800 GT",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 220",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 240",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 430",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 440",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 610",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 620",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 630",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 710",
+      "score": 1
+    },
+    {
+      "name": "GeForce GTS 250",
+      "score": 1
+    },
+    {
+      "name": "GeForce GTX 260",
+      "score": 1
+    },
+    {
+      "name": "GeForce GTX 275",
+      "score": 1
+    },
+    {
+      "name": "Intel HD Graphics 3000",
+      "score": 1
+    },
+    {
+      "name": "Intel HD Graphics 4000",
+      "score": 1
+    },
+    {
+      "name": "Intel HD Graphics 4400",
+      "score": 1
+    },
+    {
+      "name": "Radeon HD 5570",
+      "score": 1
+    },
+    {
+      "name": "Radeon HD 6570",
+      "score": 1
+    },
+    {
+      "name": "Radeon R7 240",
+      "score": 1
+    },
+    {
+      "name": "GeForce GT 640",
+      "score": 2
+    },
+    {
+      "name": "GeForce GT 730",
+      "score": 2
+    },
+    {
+      "name": "GeForce GTS 450",
+      "score": 2
+    },
+    {
+      "name": "GeForce GTX 285",
+      "score": 2
+    },
+    {
+      "name": "GeForce GTX 550 Ti",
+      "score": 2
+    },
+    {
+      "name": "Intel HD Graphics 4600",
+      "score": 2
+    },
+    {
+      "name": "Intel HD Graphics 520",
+      "score": 2
+    },
+    {
+      "name": "Intel HD Graphics 530",
+      "score": 2
+    },
+    {
+      "name": "Intel HD Graphics 620",
+      "score": 2
+    },
+    {
+      "name": "Intel HD Graphics 630",
+      "score": 2
+    },
+    {
+      "name": "Intel UHD Graphics 620",
+      "score": 2
+    },
+    {
+      "name": "Radeon 610M",
+      "score": 2
+    },
+    {
+      "name": "Radeon HD 5670",
+      "score": 2
+    },
+    {
+      "name": "Radeon HD 5750",
+      "score": 2
+    },
+    {
+      "name": "Radeon HD 6670",
+      "score": 2
+    },
+    {
+      "name": "Radeon HD 6750",
+      "score": 2
+    },
+    {
+      "name": "Radeon R7 250",
+      "score": 2
+    },
+    {
+      "name": "Radeon Vega 3",
+      "score": 2
+    },
+    {
+      "name": "GeForce GTX 460",
+      "score": 3
+    },
+    {
+      "name": "GeForce GTX 650",
+      "score": 3
+    },
+    {
+      "name": "Intel Iris Plus Graphics",
+      "score": 3
+    },
+    {
+      "name": "Intel UHD Graphics 630",
+      "score": 3
+    },
+    {
+      "name": "Intel UHD Graphics 730",
+      "score": 3
+    },
+    {
+      "name": "Radeon HD 5770",
+      "score": 3
+    },
+    {
+      "name": "Radeon HD 6770",
+      "score": 3
+    },
+    {
+      "name": "Radeon HD 6790",
+      "score": 3
+    },
+    {
+      "name": "GeForce GT 1030",
+      "score": 4
+    },
+    {
+      "name": "GeForce GTX 470",
+      "score": 4
+    },
+    {
+      "name": "GeForce GTX 560",
+      "score": 4
+    },
+    {
+      "name": "GeForce GTX 560 Ti",
+      "score": 4
+    },
+    {
+      "name": "GeForce GTX 650 Ti",
+      "score": 4
+    },
+    {
+      "name": "Intel UHD Graphics 770",
+      "score": 4
+    },
+    {
+      "name": "Radeon HD 5850",
+      "score": 4
+    },
+    {
+      "name": "Radeon HD 6850",
+      "score": 4
+    },
+    {
+      "name": "Radeon HD 7750",
+      "score": 4
+    },
+    {
+      "name": "Radeon RX 550",
+      "score": 4
+    },
+    {
+      "name": "Radeon Vega 8",
+      "score": 4
+    },
+    {
+      "name": "GeForce GTX 480",
+      "score": 5
+    },
+    {
+      "name": "GeForce GTX 570",
+      "score": 5
+    },
+    {
+      "name": "GeForce GTX 750",
+      "score": 5
+    },
+    {
+      "name": "Intel Iris Xe Graphics",
+      "score": 5
+    },
+    {
+      "name": "Radeon HD 5870",
+      "score": 5
+    },
+    {
+      "name": "Radeon HD 6870",
+      "score": 5
+    },
+    {
+      "name": "Radeon HD 7770",
+      "score": 5
+    },
+    {
+      "name": "Radeon R7 260",
+      "score": 5
+    },
+    {
+      "name": "Radeon Vega 11",
+      "score": 5
+    },
+    {
+      "name": "GeForce GTX 580",
+      "score": 6
+    },
+    {
+      "name": "GeForce GTX 650 Ti Boost",
+      "score": 6
+    },
+    {
+      "name": "GeForce GTX 750 Ti",
+      "score": 6
+    },
+    {
+      "name": "Radeon HD 6950",
+      "score": 6
+    },
+    {
+      "name": "Radeon HD 6970",
+      "score": 6
+    },
+    {
+      "name": "Radeon R7 260X",
+      "score": 6
+    },
+    {
+      "name": "Radeon R7 360",
+      "score": 6
+    },
+    {
+      "name": "Radeon RX 460",
+      "score": 6
+    },
+    {
+      "name": "GeForce GTX 1630",
+      "score": 7
+    },
+    {
+      "name": "GeForce GTX 660",
+      "score": 7
+    },
+    {
+      "name": "Radeon HD 7790",
+      "score": 7
+    },
+    {
+      "name": "Radeon RX 560",
+      "score": 7
+    },
+    {
+      "name": "GeForce GTX 660 Ti",
+      "score": 8
+    },
+    {
+      "name": "Radeon 660M",
+      "score": 8
+    },
+    {
+      "name": "Radeon HD 7850",
+      "score": 8
+    },
+    {
+      "name": "Radeon R7 265",
+      "score": 8
+    },
+    {
+      "name": "GeForce GTX 1050",
+      "score": 9
+    },
+    {
+      "name": "GeForce GTX 670",
+      "score": 9
+    },
+    {
+      "name": "GeForce GTX 760",
+      "score": 9
+    },
+    {
+      "name": "Radeon R7 370",
+      "score": 9
+    },
+    {
+      "name": "Radeon R9 270",
+      "score": 9
+    },
+    {
+      "name": "GeForce GTX 680",
+      "score": 10
+    },
+    {
+      "name": "GeForce GTX 950",
+      "score": 10
+    },
+    {
+      "name": "GeForce RTX 2050",
+      "score": 10
+    },
+    {
+      "name": "Radeon HD 7870",
+      "score": 10
+    },
+    {
+      "name": "Radeon R9 270X",
+      "score": 10
+    },
+    {
+      "name": "GeForce GTX 770",
+      "score": 11
+    },
+    {
+      "name": "Intel Arc A310",
+      "score": 11
+    },
+    {
+      "name": "Radeon 760M",
+      "score": 11
+    },
+    {
+      "name": "Radeon HD 7950",
+      "score": 11
+    },
+    {
+      "name": "Radeon R9 280",
+      "score": 11
+    },
+    {
+      "name": "Radeon R9 285",
+      "score": 11
+    },
+    {
+      "name": "Radeon RX 6400",
+      "score": 11
+    },
+    {
+      "name": "GeForce GTX 960",
+      "score": 12
+    },
+    {
+      "name": "Radeon 680M",
+      "score": 12
+    },
+    {
+      "name": "Radeon R9 380",
+      "score": 12
+    },
+    {
+      "name": "GeForce GTX 780",
+      "score": 13
+    },
+    {
+      "name": "Radeon HD 7970",
+      "score": 13
+    },
+    {
+      "name": "Radeon R9 280X",
+      "score": 13
+    },
+    {
+      "name": "Radeon R9 380X",
+      "score": 13
+    },
+    {
+      "name": "GeForce GTX 780 Ti",
+      "score": 14
+    },
+    {
+      "name": "Intel Arc A380",
+      "score": 14
+    },
+    {
+      "name": "Radeon 780M",
+      "score": 14
+    },
+    {
+      "name": "Radeon RX 470",
+      "score": 14
+    },
+    {
+      "name": "Radeon RX 6500 XT",
+      "score": 14
+    },
+    {
+      "name": "Radeon R9 290",
+      "score": 15
+    },
+    {
+      "name": "Radeon RX 570",
+      "score": 15
+    },
+    {
+      "name": "GeForce GTX 970",
+      "score": 16
+    },
+    {
+      "name": "Radeon R9 290X",
+      "score": 16
+    },
+    {
+      "name": "Radeon R9 390",
+      "score": 16
+    },
+    {
+      "name": "Radeon RX 480",
+      "score": 16
+    },
+    {
+      "name": "GeForce GTX 1060 3GB",
+      "score": 17
+    },
+    {
+      "name": "Radeon R9 390X",
+      "score": 17
+    },
+    {
+      "name": "GeForce GTX 1650 Super",
+      "score": 19
+    },
+    {
+      "name": "GeForce GTX 980",
+      "score": 20
+    },
+    {
+      "name": "Radeon R9 Fury",
+      "score": 20
+    },
+    {
+      "name": "Radeon R9 Nano",
+      "score": 20
+    },
+    {
+      "name": "Radeon RX 590",
+      "score": 20
+    },
+    {
+      "name": "GeForce GTX 1660",
+      "score": 21
+    },
+    {
+      "name": "Radeon R9 Fury X",
+      "score": 22
+    },
+    {
+      "name": "GeForce GTX 980 Ti",
+      "score": 25
+    },
+    {
+      "name": "GeForce RTX 3050 6GB",
+      "score": 26
+    },
+    {
+      "name": "Radeon RX Vega 56",
+      "score": 27
+    },
+    {
+      "name": "GeForce GTX 1070 Ti",
+      "score": 30
+    },
+    {
+      "name": "Radeon RX Vega 64",
+      "score": 30
+    },
+    {
+      "name": "Radeon RX 5700",
+      "score": 33
+    },
+    {
+      "name": "Radeon VII",
+      "score": 36
+    },
+    {
+      "name": "GeForce RTX 2070 Super",
+      "score": 39
+    },
+    {
+      "name": "Intel Arc A580",
+      "score": 40
+    },
+    {
+      "name": "GeForce RTX 2080 Super",
+      "score": 43
+    },
+    {
+      "name": "Radeon RX 6650 XT",
+      "score": 51
+    },
+    {
+      "name": "Radeon RX 6700",
+      "score": 54
+    },
+    {
+      "name": "Intel Arc B570",
+      "score": 62
+    },
+    {
+      "name": "Radeon RX 9060 XT",
+      "score": 72
+    },
+    {
+      "name": "Radeon RX 7900 GRE",
+      "score": 86
+    },
+    {
+      "name": "GeForce RTX 4070 Ti",
+      "score": 92
+    },
+    {
+      "name": "GeForce RTX 3090 Ti",
+      "score": 94
+    },
+    {
+      "name": "GeForce RTX 4080",
+      "score": 101
+    }
+  ]
+}

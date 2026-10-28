@@ -21,6 +21,9 @@ class ManualOnlyCollector(HardwareCollector):
     def detect_storage(self) -> list[StorageDeviceInfo]:
         return []
 
+    def detect_free_disk_space_gb(self) -> int | None:
+        return None
+
     def detect_psu(self) -> PsuInfo:
         return PsuInfo()
 

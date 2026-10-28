@@ -6,6 +6,12 @@ import { StatusPill } from '../../components/ui/StatusPill'
 import type { HardwareSnapshot } from '../../types/detection'
 import { SCALAR_FIELD_LABELS, SCALAR_FIELD_ORDER } from './fieldLabels'
 
+const STORAGE_TYPE_LABELS: Record<string, string> = {
+  NVME_SSD: 'SSD NVMe',
+  SATA_SSD: 'SSD SATA',
+  HDD: 'HD',
+}
+
 const NUMERIC_FIELDS = new Set<keyof HardwareSnapshot>([
   'ram_capacity_gb',
   'ram_speed_mhz',
@@ -120,6 +126,11 @@ export function DetectionStep({
                 <li key={i} className="font-medium text-slate-900 dark:text-slate-100">
                   {device.model_name ?? 'Dispositivo'}
                   {device.capacity_gb ? ` — ${device.capacity_gb} GB` : ''}
+                  {device.storage_type && (
+                    <span className="ml-2 text-xs font-normal text-slate-500 dark:text-slate-400">
+                      {STORAGE_TYPE_LABELS[device.storage_type] ?? device.storage_type}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -131,6 +142,11 @@ export function DetectionStep({
               placeholder="Ex: SSD 480GB"
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1 text-sm dark:border-slate-600 dark:bg-slate-800"
             />
+          )}
+          {snapshot.free_disk_space_gb !== null && (
+            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+              Maior espaço livre numa unidade: {snapshot.free_disk_space_gb} GB
+            </p>
           )}
         </div>
         <StatusPill status={fieldStatus.storage_devices} />

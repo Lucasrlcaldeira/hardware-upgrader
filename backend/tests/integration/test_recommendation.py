@@ -189,6 +189,48 @@ def test_no_recommendations_when_nothing_flagged(client):
     assert body["bundle"] is None
 
 
+def test_gpu_bound_recommendation_explains_gpu_as_the_limiting_side(client):
+    _import(
+        client,
+        "cpu",
+        [
+            {
+                "manufacturer": "AMD",
+                "model_name": "CPU Forte",
+                "socket": "AM5",
+                "performance_tier": 90,
+            }
+        ],
+    )
+    _import(
+        client,
+        "gpu",
+        [
+            {"manufacturer": "AMD", "model_name": "GPU Fraca", "performance_tier": 20},
+            {"manufacturer": "AMD", "model_name": "GPU Melhor", "performance_tier": 60},
+        ],
+    )
+
+    response = client.post(
+        "/recommendation/generate",
+        json={
+            "system": {"cpu_model_name": "CPU Forte", "gpu_model_name": "GPU Fraca"},
+            "profile": "ECONOMICO",
+            "resolution": "1440P",
+            "graphics_quality": "ULTRA",
+        },
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["bottleneck"]["verdict"] == "GPU_BOUND"
+    gpu_rec = next(r for r in body["recommendations"] if r["slot"] == "gpu")
+    # Antes, o texto dizia que a GPU "tinha folga" em relação à CPU — o oposto de ela ser o
+    # gargalo. Agora o problema é a própria explicação do motor de gargalo.
+    assert gpu_rec["problem"] == body["bottleneck"]["explanation"]
+    assert "Sua CPU tem folga" in gpu_rec["problem"]
+
+
 def test_404_for_unknown_component_in_system(client):
     response = client.post(
         "/recommendation/generate",

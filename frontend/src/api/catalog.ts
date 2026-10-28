@@ -24,11 +24,3 @@ export function fetchStorage(): Promise<CatalogOption[]> {
 export function fetchPsus(): Promise<CatalogOption[]> {
   return apiGet<CatalogOption[]>('/catalog/psus')
 }
-
-export function fetchCases(): Promise<CatalogOption[]> {
-  return apiGet<CatalogOption[]>('/catalog/cases')
-}
-
-export function fetchCoolers(): Promise<CatalogOption[]> {
-  return apiGet<CatalogOption[]>('/catalog/coolers')
-}
